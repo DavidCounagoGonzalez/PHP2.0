@@ -18,7 +18,7 @@
   <!-- JQVMap -->
   <link rel="stylesheet" href="plugins/jqvmap/jqvmap.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="assets/css/adminlte.min.css">
   <!-- overlayScrollbars -->
   <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
   <!-- Daterange picker -->
@@ -58,7 +58,7 @@
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="/" class="brand-link">
-      <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <img src="assets/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">DWES App</span>
     </a>
 
@@ -67,7 +67,7 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+          <img src="assets/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
           <a href="#" class="d-block">Usuario</a>
@@ -220,7 +220,7 @@
                   <tbody>
                   <tr>
                     <td>
-                      <img src="dist/img/default-150x150.png" alt="Product 1" class="img-circle img-size-32 mr-2">
+                      <img src="assets/img/default-150x150.png" alt="Product 1" class="img-circle img-size-32 mr-2">
                       Some Product
                     </td>
                     <td>$13 USD</td>
@@ -239,7 +239,7 @@
                   </tr>
                   <tr>
                     <td>
-                      <img src="dist/img/default-150x150.png" alt="Product 1" class="img-circle img-size-32 mr-2">
+                      <img src="assets/img/default-150x150.png" alt="Product 1" class="img-circle img-size-32 mr-2">
                       Another Product
                     </td>
                     <td>$29 USD</td>
@@ -258,7 +258,7 @@
                   </tr>
                   <tr>
                     <td>
-                      <img src="dist/img/default-150x150.png" alt="Product 1" class="img-circle img-size-32 mr-2">
+                      <img src="assets/img/default-150x150.png" alt="Product 1" class="img-circle img-size-32 mr-2">
                       Amazing Product
                     </td>
                     <td>$1,230 USD</td>
@@ -277,7 +277,7 @@
                   </tr>
                   <tr>
                     <td>
-                      <img src="dist/img/default-150x150.png" alt="Product 1" class="img-circle img-size-32 mr-2">
+                      <img src="assets/img/default-150x150.png" alt="Product 1" class="img-circle img-size-32 mr-2">
                       Perfect Item
                       <span class="badge bg-danger">NEW</span>
                     </td>
@@ -346,7 +346,7 @@
 <script src="plugins/summernote/summernote-bs4.min.js"></script>
 <!-- overlayScrollbars -->
 <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
-<script src="dist/js/adminlte.js"></script>
+<script src="assets/js/adminlte.js"></script>
 <!-- AdminLTE for demo purposes -->
 <!--<script src="dist/js/demo.js"></script>-->
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
