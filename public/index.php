@@ -1,7 +1,15 @@
 <?php
-$titulo = "Página test";
-$breadcrumb = ['Home', 'Test'];
-include  '../app/Views/templates/header.view.php';
+require '../vendor/autoload.php';
 
-include  '../app/Views/test.view.php';
-include  '../app/Views/templates/footer.view.php';
+require '../config.php';
+
+try{
+    Com\Daw2\Core\FrontController::main();
+} catch (Exception $ex) {
+    if($config->get('DEBUG')){
+        throw $e;
+    }
+    else{
+        echo $e->getMessage();
+    }
+}
