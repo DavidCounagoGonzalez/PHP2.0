@@ -1,3 +1,6 @@
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
 </div>
   <!-- /.content-wrapper -->
   <footer class="main-footer">
