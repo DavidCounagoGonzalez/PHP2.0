@@ -14,11 +14,10 @@ class View {
         //$name - nombre de nuestra plantilla, por ej, listar.php
         //$vars - contenedor de variables,
         //   es un array del tipo clave => valor (opcional).
-        //Cogemos una instancia de nuestra clase de configuracion.
-        $config = Config::getInstance();
+        //Cogemos una instancia de nuestra clase de configuracion.        
 
         //Creamos la ruta real a la plantilla
-        $path = $config->get('VIEWS_FOLDER') . $name;
+        $path = $_ENV['folder.views'] . $name;
 
         //Si no existe el fichero en cuestion, lanzamos una excepción
         if (file_exists($path) == false) {
@@ -41,12 +40,11 @@ class View {
         //$name - nombre de nuestra plantilla, por ej, listar.php
         //$vars - contenedor de variables,
         //   es un array del tipo clave => valor (opcional).
-        //Cogemos una instancia de nuestra clase de configuracion.
-        $config = Config::getInstance();
+        //Cogemos una instancia de nuestra clase de configuracion.        
 
         foreach ($views as $v) {
             //Creamos la ruta real a la plantilla
-            $path = $config->get('VIEWS_FOLDER') . $v;
+            $path = $_ENV['folder.views'] . $v;
 
             //Si no existe el fichero en cuestion, lanzamos una excepción
             if (file_exists($path) == false) {
@@ -63,7 +61,7 @@ class View {
         //Necesario para saber en la vista qué controlador hemos cargado y así por ejemplo marcar en la barra izquierda la sección en la que estamos
         $controller = $this->controller;
         foreach ($views as $v) {
-            $path = $config->get('VIEWS_FOLDER') . $v;
+            $path = $_ENV['folder.views'] . $v;
             //Finalmente, incluimos la plantilla.
             include($path);
         }
