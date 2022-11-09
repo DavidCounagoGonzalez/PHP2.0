@@ -1,7 +1,13 @@
 <?php
 require '../vendor/autoload.php';
+        
+$dotenv = Dotenv\Dotenv::createImmutable('../');
+$dotenv->load();
 
-require '../config.php';
+var_dump($_ENV);
+$folder = $_ENV['folder.views']; 
+echo $folder;
+die();
 
 try{
     Com\Daw2\Core\FrontController::main();
