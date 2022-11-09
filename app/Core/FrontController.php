@@ -13,6 +13,13 @@ class FrontController{
                     $controlador->index();
                 }
                 , 'get');
+        
+        Route::add('/formulario', 
+                function(){
+                    $controlador = new \Com\Daw2\Controllers\FormularioExamenController();
+                    $controlador->mostrarFormulario();
+                }
+                , 'get');
                 
         Route::run();
     }
