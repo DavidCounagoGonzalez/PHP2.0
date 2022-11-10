@@ -18,6 +18,8 @@ class FormularioExamenController extends \Com\Daw2\Core\BaseController {
         $data['errores'] = $this->checkForm($_POST);
         
         $data['isOk'] = count($data['errores']) === 0;
+        //$data['input'] = filter_input_array(INPUT_POST, FILTER_SANITIZE_SPECIAL_CHARS);
+        $data['input'] = filter_var_array($_POST, FILTER_SANITIZE_SPECIAL_CHARS);
         
         $this->view->showViews(array('templates/header.view.php', 'formulario.view.php', 'templates/footer.view.php'), $data);
     }
