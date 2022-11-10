@@ -27,6 +27,20 @@ class FrontController{
                     $controlador->procesarFormulario();
                 }
                 , 'post');
+        
+        Route::add('/anagrama', 
+                function(){
+                    $controlador = new \Com\Daw2\Controllers\AnagramaController();
+                    $controlador->mostrarFormulario();
+                }
+                , 'get');
+                
+        Route::add('/anagrama', 
+                function(){
+                    $controlador = new \Com\Daw2\Controllers\AnagramaController();
+                    $controlador->procesarFormulario();
+                }
+                , 'post');
                 
         Route::run();
     }
