@@ -41,6 +41,20 @@ class FrontController{
                     $controlador->procesarFormulario();
                 }
                 , 'post');
+        
+        Route::add('/letra-palabras', 
+                function(){
+                    $controlador = new \Com\Daw2\Controllers\PrimeraLetraPalabrasController();
+                    $controlador->mostrarFormulario();
+                }
+                , 'get');
+                
+        Route::add('/letra-palabras', 
+                function(){
+                    $controlador = new \Com\Daw2\Controllers\PrimeraLetraPalabrasController();
+                    $controlador->procesarFormulario();
+                }
+                , 'post');
                 
         Route::run();
     }
