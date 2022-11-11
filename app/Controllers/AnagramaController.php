@@ -43,8 +43,8 @@ class AnagramaController extends \Com\Daw2\Core\BaseController {
     }
     
     private function isAnagrama(string $s1, string $s2) : bool{
-        $palabra1 = preg_replace(self::EXPRESION_REGULAR, '', $s1);
-        $palabra2 = preg_replace(self::EXPRESION_REGULAR, '', $s2);
+        $palabra1 = preg_replace(self::EXPRESION_REGULAR, '', strtolower($s1));
+        $palabra2 = preg_replace(self::EXPRESION_REGULAR, '', strtolower($s2));
         
         $array1 = str_split($palabra1);
         $array2 = str_split($palabra2);
