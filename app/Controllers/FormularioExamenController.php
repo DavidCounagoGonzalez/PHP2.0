@@ -7,6 +7,7 @@ class FormularioExamenController extends \Com\Daw2\Core\BaseController {
     function mostrarFormulario() : void{
         $data = [];
         $data['titulo'] = 'Formulario examen';
+        $data['seccion'] = 'formulario';
         
         $this->view->showViews(array('templates/header.view.php', 'formulario.view.php', 'templates/footer.view.php'), $data);
     }
@@ -14,6 +15,7 @@ class FormularioExamenController extends \Com\Daw2\Core\BaseController {
     function procesarFormulario() : void{
         $data = [];
         $data['titulo'] = 'Formulario examen';
+        $data['seccion'] = 'anagrama';
         
         $data['errores'] = $this->checkForm($_POST);
         

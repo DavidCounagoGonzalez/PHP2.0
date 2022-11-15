@@ -62,6 +62,13 @@ class FrontController{
                 $controller->error404();
             }
         );
+        
+        Route::methodNotAllowed(
+            function(){
+                $controller = new \Com\Daw2\Controllers\ErroresController();
+                $controller->error405();
+            }
+        );
         Route::run();
     }
 }

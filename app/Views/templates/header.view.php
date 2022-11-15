@@ -88,7 +88,7 @@
           </li> 
             <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          <li class="nav-item">
+          <li class="nav-item menu-open">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
@@ -98,21 +98,21 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="/formulario" class="nav-link <?php echo isset($seccion) && $seccion === 'formulario' ? 'active' : ''; ?>">
                   <i class="fas fa-parachute-box nav-icon"></i>
-                  <p>Proveedores</p>
+                  <p>Formulario</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="/anagrama" class="nav-link <?php echo isset($seccion) && $seccion === 'anagrama' ? 'active' : ''; ?>">
                   <i class="fas fa-cubes nav-icon"></i>
-                  <p>Categorías</p>
+                  <p>Anagrama</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="/letra-palabras" class="nav-link <?php echo isset($seccion) && $seccion === 'letra-palabras' ? 'active' : ''; ?>">
                   <i class="fas fa-cube nav-icon"></i>
-                  <p>Productos</p>
+                  <p>Palabras-letra</p>
                 </a>
               </li>
             </ul>
