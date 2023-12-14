@@ -115,6 +115,12 @@
                   <p>Palabras-letra</p>
                 </a>
               </li>
+              <li class="nav-item">
+                  <a href="/contar-letras" class="nav-link" <?php echo isset($seccion) && $seccion === 'contar-letras' ? 'active' : ''; ?>>
+                      <i class="fas fa-cube nav-icon"></i>
+                      <p>Contar Letras</p>
+                  </a>
+              </li>
             </ul>
           </li>                   
         </ul>

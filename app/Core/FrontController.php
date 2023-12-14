@@ -56,6 +56,20 @@ class FrontController{
                 }
                 , 'post');
                 
+        Route::add('/contar-letras', 
+                function(){
+                    $controlador = new \Com\Daw2\Controllers\ContarLetrasController();
+                    $controlador->mostrarFormulario();
+                }
+                , 'get');
+                
+        Route::add('/contar-letras',
+                function(){
+                    $controlador = new \Com\Daw2\Controllers\ContarLetrasController();
+                    $controlador->procesarFormulario();
+                }
+                , 'post');
+                
         Route::pathNotFound(
             function(){
                 $controller = new \Com\Daw2\Controllers\ErroresController();
