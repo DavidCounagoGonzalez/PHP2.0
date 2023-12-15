@@ -121,6 +121,12 @@
                       <p>Contar Letras</p>
                   </a>
               </li>
+              <li class="nav-item">
+                  <a href="/notas-alumnos" class="nav-link" <?php echo isset($seccion) && $seccion === 'notas-alumnos' ? 'active' : ''; ?>>
+                      <i class="fas fa-cube nav-icon"></i>
+                      <p>Notas Alumnos</p>
+                  </a>
+              </li>
             </ul>
           </li>                   
         </ul>

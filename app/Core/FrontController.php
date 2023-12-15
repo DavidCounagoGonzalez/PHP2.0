@@ -69,6 +69,20 @@ class FrontController{
                     $controlador->procesarFormulario();
                 }
                 , 'post');
+        
+        Route::add('/notas-alumnos',
+                function(){
+                    $controlador = new \Com\Daw2\Controllers\NotasAlumnosController();
+                    $controlador->mostrarFormulario();
+                }
+                , 'get');
+             
+        Route::add('/notas-alumnos',
+                function(){
+                    $controlador = new \Com\Daw2\Controllers\NotasAlumnosController();
+                    $controlador->procesarFormulario();
+                }
+                , 'post');
                 
         Route::pathNotFound(
             function(){
