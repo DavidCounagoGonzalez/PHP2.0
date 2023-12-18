@@ -1,14 +1,11 @@
 <div class="row">    
     <?php
-    if(isset($resultado)){        
+    if(isset($res)){        
         ?>
     <div class="col-12">
         <div class="alert alert-success">
             <?php
-            echo "Contar repetición de letras en una cadena: ";
-            foreach($resultado as $letra => $lista){
-                 echo "<br /> La letra '" . $letra . "' se repite : " . $lista . " veces";
-            }
+                    var_dump($res);
             ?>
         </div>
     </div>
@@ -19,16 +16,16 @@
         <div class="card shadow mb-4">
             <div
                 class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary">Contar letras</h6>                                    
+                <h6 class="m-0 font-weight-bold text-primary">Notas Alumnos</h6>                                    
             </div>
             <!-- Card Body -->
             <div class="card-body">
                 <!--<form action="./?sec=formulario" method="post">                   -->
-                <form method="post" action="/contar-letras">  
+                <form method="post" action="">  
                     <div class="mb-3">
-                        <label for="mi_src">Texto a analizar:</label>
-                        <input type="text" class="form-control" id="texto" name="texto" rows="3"<?php echo isset($input['texto']) ? $input['texto'] : ''; ?>>
-                        <p class="text-danger"><?php echo (isset($errores['texto'])) ? $errores['texto'] : ''; ?></p>
+                        <label for="mi_src">Indica el json con los datos:</label>
+                        <textarea class="form-control" id="texto" name="texto" rows="3"<?php echo isset($input['texto']) ? $input['texto'] : ''; ?>></textarea>
+                        <p class="text-danger"><?php echo (isset($errores['texto'])) ? implode(" ", $errores['texto']) : ''; ?></p>
                     </div>                
                     <div class="mb-3">
                         <input type="submit" value="Enviar" name="enviar" class="btn btn-primary"/>

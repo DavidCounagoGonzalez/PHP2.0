@@ -80,7 +80,7 @@ class FrontController{
         Route::add('/notas-alumnos',
                 function(){
                     $controlador = new \Com\Daw2\Controllers\NotasAlumnosController();
-                    $controlador->procesarFormulario();
+                    $controlador->doProcesarAsignaturas();
                 }
                 , 'post');
                 
