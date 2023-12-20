@@ -84,6 +84,20 @@ class FrontController{
                 }
                 , 'post');
                 
+        Route::add('/calculo-notas',
+                function(){
+                    $controlador = new \Com\Daw2\Controllers\CalculoNotasController();
+                    $controlador->mostrarFormulario();
+                }
+                , 'get');
+             
+        Route::add('/calculo-notas',
+                function(){
+                    $controlador = new \Com\Daw2\Controllers\CalculoNotasController();
+                    $controlador->doProcesarCalculoNotas();
+                }
+                , 'post');
+                
         Route::pathNotFound(
             function(){
                 $controller = new \Com\Daw2\Controllers\ErroresController();

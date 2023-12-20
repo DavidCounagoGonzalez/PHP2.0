@@ -23,8 +23,8 @@
                     <th>Media</th>
                     <th>Aprobados</th>
                     <th>Suspensos</th>
-                    <th>Min</th>
                     <th>Max</th>
+                    <th>Min</th>
                 </tr>
             <?php
                     foreach ($res as $nombreAsignatura => $datosAsignatura) {
@@ -34,48 +34,13 @@
                     <td><?php echo $datosAsignatura['media'] ?></td>
                     <td><?php echo $datosAsignatura['aprobados'] ?></td>
                     <td><?php echo $datosAsignatura['suspensos'] ?></td>
-                    <td><?php echo $datosAsignatura['min']['alumno'] . ": " . $datosAsignatura['min']['nota'] ?></td>
                     <td><?php echo $datosAsignatura['max']['alumno'] . ": " . $datosAsignatura['max']['nota'] ?></td>
+                    <td><?php echo $datosAsignatura['min']['alumno'] . ": " . $datosAsignatura['min']['nota'] ?></td> 
                 </tr>
                         <?php
                     }
             ?>
             </table>
-            <div>
-                <?php
-                    foreach ($datosAsignatura as $alumno => $notas) {
-                        $suspensas = 0;
-                        $todo = '';
-                        $una = '';
-                        $dos = '';
-                        $ninguna = '';
-                        
-                        foreach($notas as $nota){
-                            if($nota < 5){
-                                $suspensas++;
-                            }
-                        }
-                        switch ($suspensas){
-                            case 0:
-                                $todo .= $alumno . ", ";
-                                break;
-                            case 1:
-                                $una .= $alumno . ", ";
-                                break;
-                            case 2:
-                                $dos .= $alumno . ", ";
-                                break;
-                            default :
-                                $ninguna .= $alumno . ", ";
-                                break;
-                        }
-                    }
-                ?>
-                <p style="background-color: green"> <?php echo $todo ?></p>
-                <p style="background-color: yellow"> <?php echo $una ?></p>
-                <p style="background-color: blue"> <?php echo $dos ?></p>
-                <p style="background-color: red"> <?php echo $ninguna ?></p>
-            </div>
         </div>
     </div>
     <?php
@@ -85,7 +50,7 @@
         <div class="card shadow mb-4">
             <div
                 class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary">Notas Alumnos</h6>                                    
+                <h6 class="m-0 font-weight-bold text-primary">Cálculo Notas</h6>                                    
             </div>
             <!-- Card Body -->
             <div class="card-body">

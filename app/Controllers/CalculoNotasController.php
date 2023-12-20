@@ -9,22 +9,22 @@ namespace Com\Daw2\Controllers;
  *
  * @author rgcenteno
  */
-class NotasAlumnosController extends \Com\Daw2\Core\BaseController{
+class CalculoNotasController extends \Com\Daw2\Core\BaseController{
     
     function mostrarFormulario() : void{
         $data = [];
-        $data['titulo'] = 'Notas Alumnos';
-        $data['seccion'] = 'notas-alumnos';
+        $data['titulo'] = 'Calculo Notas';
+        $data['seccion'] = 'calculo-notas';
         
-        $this->view->showViews(array('templates/header.view.php', 'NotasAlumnos.view.php', 'templates/footer.view.php') , $data);
+        $this->view->showViews(array('templates/header.view.php', 'CalculoNotas.view.php', 'templates/footer.view.php') , $data);
     }
     
-    function doProcesarAsignaturas() : void{
+    function doProcesarCalculoNotas() : void{
         $data = [];
-        $data['titulo'] = 'Notas Alumnos';
-        $data['seccion'] = 'notas-alumnos';
+        $data['titulo'] = 'Calculo Notas';
+        $data['seccion'] = 'calculo-notas';
         
-        $data['errores'] = $this->checkFormProc1($_POST);
+        $data['errores'] = $this->checkFormCalcN($_POST);
         $data['input'] = filter_var_array($_POST, FILTER_SANITIZE_SPECIAL_CHARS);
         
         if(count($data['errores']) === 0){
@@ -32,17 +32,17 @@ class NotasAlumnosController extends \Com\Daw2\Core\BaseController{
         }
                 
         //$data['input'] = filter_input_array(INPUT_POST, FILTER_SANITIZE_SPECIAL_CHARS);
-        $this->view->showViews(array('templates/header.view.php', 'NotasAlumnos.view.php', 'templates/footer.view.php') , $data);
+        $this->view->showViews(array('templates/header.view.php', 'CalculoNotas.view.php', 'templates/footer.view.php') , $data);
         
     }
     
     private function procesarDatos(array $datos) : array{
         $res = [];
         
-        foreach($datos as $nombreAsignatura => $datosAsignatura){
+        foreach ($datos as $nombreAsignatura => $datosAsignaturas) {
             $media = 0;
-            $suspensos = 0;
             $aprobados = 0;
+            $suspensos = 0;
             $max = array(
                 'alumno' => '',
                 'nota' => -1
@@ -52,37 +52,45 @@ class NotasAlumnosController extends \Com\Daw2\Core\BaseController{
                 'alumno' => '',
                 'nota' => 11
             );
-            foreach($datosAsignatura as $alumno => $nota){
-                $media += $nota;
-                if($nota < 5){
-                    $suspensos++;
+            
+            foreach ($datosAsignaturas as $alumno => $notas){
+                $mediaAlumno = 0;
+                foreach ($notas as $nota) {
+                    $media += $nota;
+                    $mediaAlumno += $nota;
+                    
                 }
-                else{
+                $mediaAlumno /= 3;
+                
+                if($mediaAlumno < 5){
+                    $suspensos++;
+                }else{
                     $aprobados++;
                 }
-                if($max['nota'] < $nota){
-                    $max['nota'] = $nota;
-                    $max['alumno'] = $alumno;                    
+                
+                if($max['nota'] < $mediaAlumno){
+                        $max['nota'] = round($mediaAlumno);
+                        $max['alumno'] = $alumno;
                 }
-                if($min['nota'] > $nota){
-                    $min['nota'] = $nota;
-                    $min['alumno'] = $alumno;                    
+                if($min['nota'] > $mediaAlumno){
+                        $min['nota'] = round($mediaAlumno);
+                        $min['alumno'] = $alumno;
                 }
                 
             }
-            $media /= count($datosAsignatura);
+            
+            $media /= (count($datosAsignaturas)*3);
             $res[$nombreAsignatura] = [];
-            $res[$nombreAsignatura]['media'] = $media;
+            $res[$nombreAsignatura]['media'] = round($media, 2);
             $res[$nombreAsignatura]['suspensos'] = $suspensos;
             $res[$nombreAsignatura]['aprobados'] = $aprobados;
             $res[$nombreAsignatura]['max'] = $max;
             $res[$nombreAsignatura]['min'] = $min;
-            
         }
-        return $res;
+        return $res; 
     }
     
-    private function checkFormProc1(array $post) : array{
+    private function checkFormCalcN(array $post) : array{
         $datos = json_decode($post['texto'], true);
         $errores = [];
         
@@ -101,21 +109,25 @@ class NotasAlumnosController extends \Com\Daw2\Core\BaseController{
                         $erroresTexto[] = "'$nombreMateria' no tiene asignado un array de datos.";
                     }
                     else{
-                        foreach($datosMateria as $alumno => $nota){
+                        foreach($datosMateria as $alumno => $notas){
                             if(!is_string($alumno) && !is_array($alumno)){
                                 $erroresTexto[] = "Asignatura: '$nombreMateria' el alumno '$alumno' no tiene un nombre válido.";
                             }
                             else if(!is_array($alumno)){
-                                if(!is_numeric($nota) && !is_array($nota)){
-                                    $erroresTexto[] = "Asignatura: '$nombreMateria', alumno '$alumno' tiene como nota '$nota' que no es válida.";
+                                if(!is_numeric($notas) && !is_array($notas)){
+                                    $erroresTexto[] = "Asignatura: '$nombreMateria', alumno '$alumno' tiene como nota '$notas' que no es válida.";
                                 }
-                                else if(!is_array($nota)){
-                                    if($nota < 0 || $nota > 10){
-                                        $erroresTexto[] = "Asignatura: '$nombreMateria', alumno '$alumno' tiene como nota '$nota' que no es válida.";
+                                else if(!is_array($notas)){
+                                    if($notas < 0 || $notas > 10){
+                                        $erroresTexto[] = "Asignatura: '$nombreMateria', alumno '$alumno' tiene como nota '$notas' que no es válida.";
                                     }
                                 }
                                 else{
-                                    $erroresTexto[] = "Asignatura: '$nombreMateria', alumno '$alumno' tiene como nota un array.";
+                                    foreach ($notas as $nota) {
+                                        if($nota < 0 || $nota > 10){
+                                            $erroresTexto[] = "Asignatura: '$nombreMateria', alumno '$alumno' tiene como nota '$nota' que no es válida.";
+                                        }
+                                    }
                                 }
                             }
                         }

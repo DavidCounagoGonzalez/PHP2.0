@@ -26,6 +26,7 @@
   <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
   <!-- summernote -->
   <link rel="stylesheet" href="plugins/summernote/summernote-bs4.min.css">
+  <script src="https://kit.fontawesome.com/a3b3463635.js" crossorigin="anonymous"></script>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper"> 
@@ -116,15 +117,21 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/contar-letras" class="nav-link" <?php echo isset($seccion) && $seccion === 'contar-letras' ? 'active' : ''; ?>>
+                <a href="/contar-letras" class="nav-link <?php echo isset($seccion) && $seccion === 'contar-letras' ? 'active' : ''; ?>">
                     <i class="fas fa-cube nav-icon"></i>
                     <p>Contar Letras</p>
                 </a>
               </li>
               <li class="nav-item">
-                  <a href="/notas-alumnos" class="nav-link" <?php echo isset($seccion) && $seccion === 'notas-alumnos' ? 'active' : ''; ?>>
+                  <a href="/notas-alumnos" class="nav-link <?php echo isset($seccion) && $seccion === 'notas-alumnos' ? 'active' : ''; ?>">
                       <i class="fas fa-cube nav-icon"></i>
                       <p>Notas Alumnos</p>
+                  </a>
+              </li>
+              <li class="nav-item">
+                  <a href="/calculo-notas" class="nav-link <?php echo isset($seccion) && $seccion === 'calculo-notas' ? 'active' : ''; ?>">
+                      <i class="fas fa-solid fa-calculator"></i>
+                      <p> Cálculo Notas</p>
                   </a>
               </li>
             </ul>
