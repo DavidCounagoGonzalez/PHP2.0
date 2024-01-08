@@ -98,6 +98,13 @@ class FrontController{
                 }
                 , 'post');
                 
+        Route::add('/test-bbdd', 
+            function (){
+                    $controlador = new \Com\Daw2\Controllers\UsuarioController();
+                    $controlador ->test();
+            }
+            , 'get');
+                
         Route::pathNotFound(
             function(){
                 $controller = new \Com\Daw2\Controllers\ErroresController();
