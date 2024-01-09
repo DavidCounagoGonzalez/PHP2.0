@@ -23,6 +23,7 @@ class UsuarioModel {
         ];
         try{
             $pdo = new PDO($dsn, $user, $pass, $options);
+            return $pdo;
         } catch (\PDOException $ex) {
             throw new \PDOException($e->getMessage(), (int)$e->getCode());
         }

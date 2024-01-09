@@ -98,10 +98,10 @@ class FrontController{
                 }
                 , 'post');
                 
-        Route::add('/test-bbdd', 
+        Route::add('/consulta-usuarios', 
             function (){
                     $controlador = new \Com\Daw2\Controllers\UsuarioController();
-                    $controlador ->test();
+                    $controlador ->mostrarConsulta();
             }
             , 'get');
                 

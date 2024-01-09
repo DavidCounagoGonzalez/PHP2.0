@@ -130,8 +130,14 @@
               </li>
               <li class="nav-item">
                   <a href="/calculo-notas" class="nav-link <?php echo isset($seccion) && $seccion === 'calculo-notas' ? 'active' : ''; ?>">
-                      <i class="fas fa-solid fa-calculator"></i>
+                      <i class="fas fa-solid fa-calculator nav-icon"></i>
                       <p> Cálculo Notas</p>
+                  </a>
+              </li>
+              <li class="nav-item">
+                  <a href="/consulta-usuarios" class="nav-link <?php echo isset($seccion) && $seccion === 'consulta-usuarios' ? 'active' : ''; ?>">
+                      <i class="fas fa-solid fa-calculator nav-icon"></i>
+                      <p>Consultas Usuarios</p>
                   </a>
               </li>
             </ul>
