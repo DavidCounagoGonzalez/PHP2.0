@@ -24,7 +24,7 @@
             <?php
                     foreach ($res as $row){
                         ?>
-                <tr>
+                <tr> 
                     <td><?php echo $row['username'] ?></td>
                 </tr>
                         <?php
