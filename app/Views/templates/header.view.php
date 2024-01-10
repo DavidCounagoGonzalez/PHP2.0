@@ -98,6 +98,15 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
+            <li class="nav-item menu-open">
+                <a href="#" class="nav-link">
+                  <i class="nav-icon fas fa-bars"></i>
+                  <p>
+                    Formularios
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="/formulario" class="nav-link <?php echo isset($seccion) && $seccion === 'formulario' ? 'active' : ''; ?>">
                   <i class="fas fa-parachute-box nav-icon"></i>
@@ -134,9 +143,10 @@
                       <p> Cálculo Notas</p>
                   </a>
               </li>
+            </ul>
               <li class="nav-item menu-open">
                 <a href="#" class="nav-link">
-                  <i class="nav-icon fas fa-tachometer-alt"></i>
+                  <i class="nav-icon fas fa-bars"></i>
                   <p>
                     Base de Datos
                     <i class="right fas fa-angle-left"></i>
