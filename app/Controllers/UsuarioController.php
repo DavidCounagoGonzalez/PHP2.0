@@ -5,17 +5,56 @@ namespace Com\Daw2\Controllers;
 
 class UsuarioController extends \Com\Daw2\Core\BaseController {
     
-    function mostrarConsulta(){
+    function mostrarAllUsers(){
         $data=[];
-        $data['titulo']='Consultas-Usuarios';
-        $data['seccion']='consulta-usuarios';
+        $data['titulo']='All-Usuarios';
+        $data['seccion']='all-usuarios';
         
         $modelo = new \Com\Daw2\Models\UsuarioModel();
         $usuarios = $modelo->getAllUsers();
         
         $data['usuarios']= $usuarios;
 
-        $this->view->showViews(array('templates/header.view.php', 'UsuarioModel.view.php', 'templates/footer.view.php') , $data);
+        $this->view->showViews(array('templates/header.view.php', 'ConsultaUsuarios.view.php', 'templates/footer.view.php') , $data);
+    }
+    
+    function mostrarPorSalario(){
+        $data=[];
+        $data['titulo']='Por-Salario';
+        $data['seccion']='por-salario';
+        
+        $modelo = new \Com\Daw2\Models\UsuarioModel();
+        $usuarios = $modelo->getAllUserOrderBySalar();
+        
+        $data['usuarios']= $usuarios;
+
+        $this->view->showViews(array('templates/header.view.php', 'ConsultaUsuarios.view.php', 'templates/footer.view.php') , $data);
+    }
+    
+    function mostrarStandard(){
+        $data=[];
+        $data['titulo']='Standard-Users';
+        $data['seccion']='standard-users';
+        
+        $modelo = new \Com\Daw2\Models\UsuarioModel();
+        $usuarios = $modelo->getAllStandardUsers();
+        
+        $data['usuarios']= $usuarios;
+
+        $this->view->showViews(array('templates/header.view.php', 'ConsultaUsuarios.view.php', 'templates/footer.view.php') , $data);
+    }
+    
+    function mostrarCarlos(){
+        $data=[];
+        $data['titulo']='Carlos';
+        $data['seccion']='carlos';
+        
+        $modelo = new \Com\Daw2\Models\UsuarioModel();
+        $usuarios = $modelo->getAllUsersCarlos();
+        
+        $data['usuarios']= $usuarios;
+
+        $this->view->showViews(array('templates/header.view.php', 'ConsultaUsuarios.view.php', 'templates/footer.view.php') , $data);
     }
 
     

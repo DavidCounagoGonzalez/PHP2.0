@@ -134,11 +134,40 @@
                       <p> Cálculo Notas</p>
                   </a>
               </li>
-              <li class="nav-item">
-                  <a href="/consulta-usuarios" class="nav-link <?php echo isset($seccion) && $seccion === 'consulta-usuarios' ? 'active' : ''; ?>">
-                      <i class="fas fa-solid fa-calculator nav-icon"></i>
-                      <p>Consultas Usuarios</p>
-                  </a>
+              <li class="nav-item menu-open">
+                <a href="#" class="nav-link">
+                  <i class="nav-icon fas fa-tachometer-alt"></i>
+                  <p>
+                    Base de Datos
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/all-usuarios" class="nav-link <?php echo isset($seccion) && $seccion === 'all-usuarios' ? 'active' : ''; ?>">
+                            <i class="fas fa-solid fa-database nav-icon"></i>
+                            <p>All Usuarios</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/por-salario" class="nav-link <?php echo isset($seccion) && $seccion === 'por-salario' ? 'active' : ''; ?>">
+                            <i class="fas fa-solid fa-database nav-icon"></i>
+                            <p>Por Salario</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/standard-users" class="nav-link <?php echo isset($seccion) && $seccion === 'standard-users' ? 'active' : ''; ?>">
+                            <i class="fas fa-solid fa-database nav-icon"></i>
+                            <p>Usuarios Estandar</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/carlos" class="nav-link <?php echo isset($seccion) && $seccion === 'carlos' ? 'active' : ''; ?>">
+                            <i class="fas fa-solid fa-database nav-icon"></i>
+                            <p>Carlos</p>
+                        </a>
+                    </li>
+                </ul>
               </li>
             </ul>
           </li>                   
