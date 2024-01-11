@@ -12,8 +12,15 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-12 col-lg-4">
-                     <label for="categoria">Categoría:</label>
-                     <input type="text" class="form-control" name="categoria" id="categoria" value="" />
+                     <label for="selector">Categoría:</label>
+                     <select name="selector" id="selector">
+                         <option value="administrador">Administrador</option>
+                        <option value="dev" selected>Desarrollador</option>
+                        <option value="facturas">Facturas</option>
+                        <option value="gestor">Gestor</option>
+                        <option value="standard">Estandar</option>
+                        <option value="ventas">Ventas</option>
+                      </select>
                 </div>
                 <div class="col-12 col-lg-3">
                     <label for="username">Nombre:</label>
@@ -23,7 +30,7 @@
         </div>
         <div class="card-footer">
             <div class="col-12 text-right">                     
-                <a href="/proveedores" value="" name="reiniciar" class="btn btn-danger">Reiniciar filtros</a>
+                <a href="/all-usuarios" value="" name="reiniciar" class="btn btn-danger">Reiniciar filtros</a>
                 <input type="submit" value="Aplicar filtros" name="enviar" class="btn btn-primary ml-2"/>
             </div>
         </div>
