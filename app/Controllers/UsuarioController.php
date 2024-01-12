@@ -10,8 +10,10 @@ class UsuarioController extends \Com\Daw2\Core\BaseController {
         $data['titulo']='All-Usuarios';
         $data['seccion']='all-usuarios';
         
-        $modelo = new \Com\Daw2\Models\UsuarioModel();
-        $usuarios = $modelo->getAllUsers();
+//        $modelo = new \Com\Daw2\Models\UsuarioModel();
+//        $usuarios = $modelo->getAllUsers();
+        
+        $usuarios = $this->filtrado();
         
         $data['usuarios']= $usuarios;
 
@@ -56,7 +58,15 @@ class UsuarioController extends \Com\Daw2\Core\BaseController {
 
         $this->view->showViews(array('templates/header.view.php', 'ConsultaUsuarios.view.php', 'templates/footer.view.php') , $data);
     }
-
+    
+    function filtrado(){
+        $filtro = $_GET['selector'];
+        
+        $modelo = new \Com\Daw2\Models\UsuarioModel();
+        $usuarios = $modelo->getByRol($filtro);
+        
+        return $usuarios;
+    }
     
     
 }
