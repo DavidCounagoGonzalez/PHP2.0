@@ -4,7 +4,7 @@
         ?>
     <div class="col-12">
     <div class="card shadow mb-4">
-        <form method="get" action="/all-usuarios">
+        <form method="get" action="all-usuarios">
         <div
             class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
             <h6 class="m-0 font-weight-bold text-primary">Filtros</h6>                                    
@@ -14,7 +14,7 @@
                 <div class="col-12 col-lg-4">
                      <label for="selector">Categoría:</label>
                      <select name="selector" id="selector">
-                         <option value="administrador">Administrador</option>
+                        <option value="administrador">Administrador</option>
                         <option value="dev" selected>Desarrollador</option>
                         <option value="facturas">Facturas</option>
                         <option value="gestor">Gestor</option>
