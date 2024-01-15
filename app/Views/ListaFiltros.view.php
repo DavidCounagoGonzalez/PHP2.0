@@ -10,52 +10,36 @@
                         <h6 class="m-0 font-weight-bold text-primary">Filtros</h6>                                    
                     </div>
                     <div class="card-body">
-                        <div class="row">
-                            <div class="col-12 col-lg-4">
-                            <div class="mb-3">
-                                <label for="alias">Alias:</label>
-                                <input type="text" class="form-control" name="alias" id="alias" value="" />
-                            </div>
-                        </div>  
-                        <div class="col-12 col-lg-4">
-                            <div class="mb-3">
-                                <label for="nombre_completo">Nombre completo:</label>
-                                <input type="text" class="form-control" name="nombre_completo" id="nombre_completo" value="" />
-                            </div>
-                        </div> 
+                        <div class="row">  
                             <div class="col-12 col-lg-4">
                                 <div class="mb-3">
-                                <label for="id_rol">Rol:</label>
-                                <select name="id_rol" id="id_rol" class="form-control select2" data-placeholder="Tipo proveedor">
-                                    <option value="">-</option>
-                                    <?php
-                                    foreach ($roles as $rol) {
-                                        ?> <option value="<?php echo $rol['id_rol'] ?>" <?php echo (isset($_GET['id_rol']) && $rol['id_rol'] == $_GET['id_rol']) ? 'selected' : ''; ?> ><?php echo ucfirst($rol['nombre_rol']) ?> </option>
-                                        <?php
-                                    }
-                                    ?>
-                                </select>
+                                    <label for="username">Nombre completo:</label>
+                                    <input type="text" class="form-control" name="username" id="username" value="<?php echo (isset($input['username'])) ? $input['username'] : "" ?>" />
                                 </div>
-                            </div>
+                            </div> 
                             <div class="col-12 col-lg-4">
                                 <div class="mb-3">
-                                    <label for="id_continente">Continente:</label>
-                                    <select name="id_continente" id="id_continente" class="form-control" data-placeholder="Continente">
+                                    <label for="id_rol">Rol:</label>
+                                    <select name="id_rol" id="id_rol" class="form-control select2" data-placeholder="Tipo proveedor">
                                         <option value="">-</option>
-                                        <option value="1" >Europa</option>
-                                        <option value="2" >Asia</option>                                                                            
+                                        <?php
+                                        foreach ($roles as $rol) {
+                                            ?> <option value="<?php echo $rol['id_rol'] ?>" <?php echo (isset($_GET['id_rol']) && $rol['id_rol'] == $_GET['id_rol']) ? 'selected' : ''; ?> ><?php echo ucfirst($rol['nombre_rol']) ?> </option>
+                                            <?php
+                                        }
+                                        ?>
                                     </select>
                                 </div>
                             </div>                        
                             <div class="col-12 col-lg-4">
                                 <div class="mb-3">
-                                    <label for="anho_fundacion">Año fundación:</label>
+                                    <label for="anho_fundacion">Salario:</label>
                                     <div class="row">
                                         <div class="col-6">
-                                            <input type="text" class="form-control" name="min_anho" id="min_anho" value="" placeholder="Mí­nimo" />
+                                            <input type="text" class="form-control" name="min_salar" id="min_salar" value="" placeholder="Mí­nimo" />
                                         </div>
                                         <div class="col-6">
-                                            <input type="text" class="form-control" name="max_anho" id="max_anho" value="" placeholder="Máximo" />
+                                            <input type="text" class="form-control" name="max_salar" id="max_salar" value="" placeholder="Máximo" />
                                         </div>
                                     </div>
                                 </div>

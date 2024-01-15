@@ -62,6 +62,8 @@ class UsuarioController extends \Com\Daw2\Core\BaseController {
         $data = [];
         $data['titulo'] = 'Con filtros';
         $data['seccion'] = 'con-filtros';
+        
+        $input = filter_var_array($_GET, FILTER_SANITIZE_STRING);
 
         $usuarios = $this->filtrado();
         
@@ -70,14 +72,16 @@ class UsuarioController extends \Com\Daw2\Core\BaseController {
 
         $data['usuarios'] = $usuarios;
         $data['roles'] = $roles;
+        $data['input'] = $input;
 
         $this->view->showViews(array('templates/header.view.php', 'ListaFiltros.view.php', 'templates/footer.view.php'), $data);
     }
 
     function filtrado() {
-        if (isset($_GET['id_rol']) && filter_var($_GET['id_rol'], FILTER_VALIDATE_INT)) {
+        if (!empty($_GET['id_rol']) && filter_var($_GET['id_rol'], FILTER_VALIDATE_INT) || !empty($_GET['username']) || 
+                !empty($_GET['min_salar']) && filter_var($_GET['min_salar'], FILTER_VALIDATE_INT) || !empty($_GET['max_salar']) && filter_var($_GET['max_salar'], FILTER_VALIDATE_INT)){
             $modelo = new \Com\Daw2\Models\UsuarioModel();
-            $usuarios = $modelo->getByRol((int)$_GET['id_rol']);
+            $usuarios = $modelo->getByFiltros((int)$_GET['id_rol'], $_GET['username'], (int)$_GET['min_salar'], (int)$_GET['max_salar']);
         }else{
             $usuarios = [];
         }
