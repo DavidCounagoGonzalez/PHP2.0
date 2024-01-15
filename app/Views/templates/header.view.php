@@ -177,6 +177,12 @@
                             <p>Carlos</p>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="/con-filtros" class="nav-link <?php echo isset($seccion) && $seccion === 'con-filtros' ? 'active' : ''; ?>">
+                            <i class="fas fa-solid fa-database nav-icon"></i>
+                            <p>Con Filtros</p>
+                        </a>
+                    </li>
                 </ul>
               </li>
             </ul>

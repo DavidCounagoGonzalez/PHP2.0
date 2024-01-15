@@ -125,6 +125,13 @@ class FrontController{
                     $controlador ->mostrarCarlos();
             }
             , 'get');
+        
+        Route::add('/con-filtros', 
+            function (){
+                    $controlador = new \Com\Daw2\Controllers\UsuarioController();
+                    $controlador ->mostrarListadoFiltros();
+            }
+            , 'get');
                 
         Route::pathNotFound(
             function(){
