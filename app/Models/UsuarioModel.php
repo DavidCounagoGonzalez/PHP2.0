@@ -25,8 +25,9 @@ class UsuarioModel extends \Com\Daw2\Core\BaseDbModel{
         return $stmt->fetchAll();
     }
     
-    function getByRol($filtro){
-        $stmt = $this->pdo->query(self::SELECT_FROM . " WHERE u.id_rol = '" . $filtro . "'");
+    function getByRol(int $idRol) : array{
+        $stmt = $this->pdo->prepare(self::SELECT_FROM . " WHERE u.id_rol = :id_rol");
+        $stmt->execute(['id_rol' => $idRol]);
         return $stmt->fetchAll();
     }
     

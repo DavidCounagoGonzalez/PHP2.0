@@ -65,8 +65,8 @@ class UsuarioController extends \Com\Daw2\Core\BaseController {
 
         $usuarios = $this->filtrado();
         
-        $rolModelo = new \Com\Daw2\Models\RolesModel();
-        $roles = $rolModelo->getAllRols();
+        $rolModel = new \Com\Daw2\Models\RolesModel();
+        $roles = $rolModel->getAllRols();
 
         $data['usuarios'] = $usuarios;
         $data['roles'] = $roles;
@@ -75,9 +75,9 @@ class UsuarioController extends \Com\Daw2\Core\BaseController {
     }
 
     function filtrado() {
-        if (isset($_GET['roles'])) {
+        if (isset($_GET['id_rol']) && filter_var($_GET['id_rol'], FILTER_VALIDATE_INT)) {
             $modelo = new \Com\Daw2\Models\UsuarioModel();
-            $usuarios = $modelo->getByRol($_GET['roles']);
+            $usuarios = $modelo->getByRol((int)$_GET['id_rol']);
         }else{
             $usuarios = [];
         }

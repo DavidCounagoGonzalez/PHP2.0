@@ -25,11 +25,12 @@
                         </div> 
                             <div class="col-12 col-lg-4">
                                 <div class="mb-3">
-                                <label for="roles">Rol:</label>
-                                <select name="roles" id="roles" class="form-control select2" data-placeholder="Tipo proveedor">
+                                <label for="id_rol">Rol:</label>
+                                <select name="id_rol" id="id_rol" class="form-control select2" data-placeholder="Tipo proveedor">
+                                    <option value="">-</option>
                                     <?php
                                     foreach ($roles as $rol) {
-                                        ?> <option value="<?php echo $rol['id_rol'] ?>"><?php echo $rol['nombre_rol'] ?> </option>
+                                        ?> <option value="<?php echo $rol['id_rol'] ?>" <?php echo (isset($_GET['id_rol']) && $rol['id_rol'] == $_GET['id_rol']) ? 'selected' : ''; ?> ><?php echo ucfirst($rol['nombre_rol']) ?> </option>
                                         <?php
                                     }
                                     ?>
@@ -63,7 +64,7 @@
                     </div>
                     <div class="card-footer">
                         <div class="col-12 text-right">                     
-                            <a href="/all-usuarios" value="" name="reiniciar" class="btn btn-danger">Reiniciar filtros</a>
+                            <a href="/con-filtros" value="" name="reiniciar" class="btn btn-danger">Reiniciar filtros</a>
                             <input type="submit" value="Aplicar filtros" name="enviar" class="btn btn-primary ml-2"/>
                         </div>
                     </div>
