@@ -47,6 +47,7 @@ class UsuarioModel extends \Com\Daw2\Core\BaseDbModel{
                 $consulta .= " AND u.username LIKE :username";
             }else{
                 $consulta .= " WHERE u.username LIKE :username";
+                $primero = true;
             }
             
             $username = '%' . $username . '%';
@@ -54,23 +55,35 @@ class UsuarioModel extends \Com\Daw2\Core\BaseDbModel{
         }
         
         if(!empty($minSalar)){
+            
+            if($minSalar<0){
+                $minSalar = 0;
+            }
+            
             if($primero){
-                $consulta = " AND u.salarioBruto >= :minSalar";
+                $consulta .= " AND u.salarioBruto >= :minSalar";
             }else{
-                $consulta = " WHERE u.salarioBruto >= :minSalar";
+                $consulta .= " WHERE u.salarioBruto >= :minSalar";
+                $primero = true;
             }
             $datos['minSalar'] = $minSalar;
         }
         
         if(!empty($maxSalar)){
+            
+            if($maxSalar<0){
+                $maxSalar = 0;
+            }
+            
             if($primero){
-                $consulta = " AND u.salarioBruto <= :maxSalar";
+                $consulta .= " AND u.salarioBruto <= :maxSalar";
             }else{
-                $consulta = " WHERE u.salarioBruto <= :maxSalar";
+                $consulta .= " WHERE u.salarioBruto <= :maxSalar";
+                $primero = true;
             }
             $datos['maxSalar'] = $maxSalar;
         }
-        
+          
         $stmt = $this->pdo->prepare($consulta);
         $stmt->execute($datos);
         return $stmt->fetchAll();
