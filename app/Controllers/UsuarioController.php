@@ -81,7 +81,7 @@ class UsuarioController extends \Com\Daw2\Core\BaseController {
         if (!empty($_GET['id_rol']) && filter_var($_GET['id_rol'], FILTER_VALIDATE_INT) || !empty($_GET['username']) || 
                 !empty($_GET['min_salar']) && is_numeric($_GET['min_salar']) || !empty($_GET['max_salar']) && is_numeric($_GET['max_salar'])){
             $modelo = new \Com\Daw2\Models\UsuarioModel();
-            $usuarios = $modelo->getByFiltros((int)$_GET['id_rol'], $_GET['username'], (int)$_GET['min_salar'], (int)$_GET['max_salar']);
+            $usuarios = $modelo->getByFiltros((int)$_GET['id_rol'], $_GET['username'], (float)$_GET['min_salar'], (float)$_GET['max_salar']);
         }else{
             $usuarios = [];
         }
