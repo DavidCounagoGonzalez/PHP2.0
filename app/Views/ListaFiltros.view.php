@@ -36,10 +36,10 @@
                                     <label for="anho_fundacion">Salario:</label>
                                     <div class="row">
                                         <div class="col-6">
-                                            <input type="text" class="form-control" name="min_salar" id="min_salar" value="" placeholder="Mí­nimo" />
+                                            <input type="text" class="form-control" name="min_salar" id="min_salar" value="<?php echo (isset($input['min_salar'])) ? $input['min_salar'] : "" ?>" placeholder="Mí­nimo" />
                                         </div>
                                         <div class="col-6">
-                                            <input type="text" class="form-control" name="max_salar" id="max_salar" value="" placeholder="Máximo" />
+                                            <input type="text" class="form-control" name="max_salar" id="max_salar" value="<?php echo (isset($input['max_salar'])) ? $input['max_salar'] : "" ?>" placeholder="Máximo" />
                                         </div>
                                     </div>
                                 </div>
