@@ -79,9 +79,10 @@ class UsuarioController extends \Com\Daw2\Core\BaseController {
 
     function filtrado() {
         if (!empty($_GET['id_rol']) && filter_var($_GET['id_rol'], FILTER_VALIDATE_INT) || !empty($_GET['username']) || 
-                !empty($_GET['min_salar']) && is_numeric($_GET['min_salar']) || !empty($_GET['max_salar']) && is_numeric($_GET['max_salar'])){
+                !empty($_GET['min_salar']) && is_numeric($_GET['min_salar']) || !empty($_GET['max_salar']) && is_numeric($_GET['max_salar']) || 
+                !empty($_GET['min_retencion']) && is_numeric($_GET['min_retencion']) || !empty($_GET['max_retencion']) && is_numeric($_GET['max_retencion'])){
             $modelo = new \Com\Daw2\Models\UsuarioModel();
-            $usuarios = $modelo->getByFiltros((int)$_GET['id_rol'], $_GET['username'], (float)$_GET['min_salar'], (float)$_GET['max_salar']);
+            $usuarios = $modelo->getByFiltros((int)$_GET['id_rol'], $_GET['username'], (float)$_GET['min_salar'], (float)$_GET['max_salar'], (float)$_GET['min_retencion'], (float)$_GET['max_retencion']);
         }else{
             $usuarios = [];
         }

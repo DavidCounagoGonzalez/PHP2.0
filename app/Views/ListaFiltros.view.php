@@ -44,6 +44,19 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-12 col-lg-4">
+                                <div class="mb-3">
+                                    <label for="anho_fundacion">Retención:</label>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <input type="text" class="form-control" name="min_retencion" id="min_retencion" value="<?php echo (isset($input['min_retencion'])) ? $input['min_retencion'] : "" ?>" placeholder="Mí­nimo" />
+                                        </div>
+                                        <div class="col-6">
+                                            <input type="text" class="form-control" name="max_retencion" id="max_retencion" value="<?php echo (isset($input['max_retencion'])) ? $input['max_retencion'] : "" ?>" placeholder="Máximo" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="card-footer">
@@ -62,6 +75,7 @@
                                     <th>Rol</th>
                                     <th>salarioBruto</th>
                                     <th>retencionIRPF</th>
+                                    <th>Región</th>
                                 </tr>
                                 <?php
                                 foreach ($usuarios as $row) {
@@ -78,6 +92,7 @@
                                         <td><?php echo $row['rol'] ?></td>
                                         <td><?php echo $row['salarioBruto'] ?></td>
                                         <td><?php echo $row['retencionIRPF'] ?></td>
+                                        <td><?php echo $row['country'] ?></td>
                                     </tr>
                                     <?php
                                 }
