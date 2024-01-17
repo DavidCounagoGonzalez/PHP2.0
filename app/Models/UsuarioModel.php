@@ -96,10 +96,10 @@ class UsuarioModel extends \Com\Daw2\Core\BaseDbModel {
             }
             echo("<script>console.log('PHP: " . var_dump($paises) . "');</script>");
             array_push($filtros, implode(" OR", $paises));
-            
+
         }
 
-        if (count($datos) > 0) {
+        if (count($datos) > 0 || !empty($idPaises)) {
             $consulta .= " WHERE";
             $consulta .= $filtros[0];
             foreach ($filtros as $key => $filtro) {
