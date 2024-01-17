@@ -20,7 +20,7 @@
                             <div class="col-12 col-lg-4">
                                 <div class="mb-3">
                                     <label for="id_rol">Rol:</label>
-                                    <select name="id_rol" id="id_rol" class="form-control select2" data-placeholder="Tipo proveedor">
+                                    <select name="id_rol" id="id_rol" class="form-control select2" data-placeholder="Rol">
                                         <option value="">-</option>
                                         <?php
                                         foreach ($roles as $rol) {
@@ -55,6 +55,20 @@
                                             <input type="text" class="form-control" name="max_retencion" id="max_retencion" value="<?php echo (isset($input['max_retencion'])) ? $input['max_retencion'] : "" ?>" placeholder="Máximo" />
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-4">
+                                <div class="mb-3">
+                                    <label for="id_pais">Paises:</label>
+                                    <select name="id_pais[]" id="id_pais" class="form-control select2" data-placeholder="Pais" multiple>
+                                        <option value="">-</option>
+                                        <?php
+                                        foreach ($paises as $pais) {
+                                            ?> <option value="<?php echo $pais['id'] ?>" <?php echo (isset($_GET['id_pais']) && $pais['id'] == $_GET['id_pais']) ? 'selected' : ''; ?> ><?php echo ucfirst($pais['country_name']) ?> </option>
+                                            <?php
+                                        }
+                                        ?>
+                                    </select>
                                 </div>
                             </div>
                         </div>

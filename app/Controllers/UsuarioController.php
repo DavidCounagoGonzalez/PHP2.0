@@ -69,10 +69,14 @@ class UsuarioController extends \Com\Daw2\Core\BaseController {
         
         $rolModel = new \Com\Daw2\Models\RolesModel();
         $roles = $rolModel->getAllRols();
+        $paisesModel = new \Com\Daw2\Models\PaisesModel();
+        $paises = $paisesModel->getAllPaises();
 
         $data['usuarios'] = $usuarios;
         $data['roles'] = $roles;
+        $data['paises'] = $paises;
         $data['input'] = $input;
+        $data['js'] = array('plugins/select2/js/select2.full.min.js', 'assets/js/pages/usuarios-filtro.view.js');
 
         $this->view->showViews(array('templates/header.view.php', 'ListaFiltros.view.php', 'templates/footer.view.php'), $data);
     }
@@ -80,9 +84,13 @@ class UsuarioController extends \Com\Daw2\Core\BaseController {
     function filtrado() {
         if (!empty($_GET['id_rol']) && filter_var($_GET['id_rol'], FILTER_VALIDATE_INT) || !empty($_GET['username']) || 
                 !empty($_GET['min_salar']) && is_numeric($_GET['min_salar']) || !empty($_GET['max_salar']) && is_numeric($_GET['max_salar']) || 
-                !empty($_GET['min_retencion']) && is_numeric($_GET['min_retencion']) || !empty($_GET['max_retencion']) && is_numeric($_GET['max_retencion'])){
+                !empty($_GET['min_retencion']) && is_numeric($_GET['min_retencion']) || !empty($_GET['max_retencion']) && is_numeric($_GET['max_retencion']) || 
+                !empty($_GET['id_pais']) && is_array($_GET['id_pais'])){
+            
+            
             $modelo = new \Com\Daw2\Models\UsuarioModel();
-            $usuarios = $modelo->getByFiltros((int)$_GET['id_rol'], $_GET['username'], (float)$_GET['min_salar'], (float)$_GET['max_salar'], (float)$_GET['min_retencion'], (float)$_GET['max_retencion']);
+            $usuarios = $modelo->getByFiltros((int)$_GET['id_rol'], $_GET['username'], (float)$_GET['min_salar'], (float)$_GET['max_salar'],
+                    (float)$_GET['min_retencion'], (float)$_GET['max_retencion'], $_GET['id_pais']);
         }else{
             $usuarios = [];
         }

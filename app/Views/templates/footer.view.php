@@ -44,6 +44,15 @@
 <!-- AdminLTE for demo purposes -->
 <!--<script src="dist/js/demo.js"></script>-->
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<!--<script src="dist/js/pages/dashboard.js"></script>-_>
+<!--<script src="dist/js/pages/dashboard.js"></script>-->
+<?php
+if(isset($js) && is_array($js)){
+    foreach($js as $file){
+        ?>
+        <script src="<?php echo $file; ?>"></script>
+<?php
+    }
+}
+?>
 </body>
 </html>
