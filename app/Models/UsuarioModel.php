@@ -36,7 +36,7 @@ class UsuarioModel extends \Com\Daw2\Core\BaseDbModel {
         $consulta = self::SELECT_FROM;
         $filtros = [];
         $datos = [];
-        $paises = [];
+        $paisesQuery = [];
 
         if (!empty($idRol)) {
             $filtros[] = " u.id_rol = :id_rol";
@@ -93,11 +93,10 @@ class UsuarioModel extends \Com\Daw2\Core\BaseDbModel {
             $paisNum = 0;
             foreach ($idPaises as $idPais) {
                 $paisNum +=1;
-                $paises[] = " u.id_country = :idPais$paisNum";
+                $paisesQuery[] = " u.id_country = :idPais$paisNum";
                 $datos["idPais$paisNum"] = $idPais;
             }
-            echo("<script>console.log('PHP: " . var_dump($paises) . "');</script>");
-            $filtros[] = implode(" OR", $paises);
+            $filtros[] = " (" . implode(" OR", $paisesQuery) . ")";
 
         }
 
@@ -109,6 +108,10 @@ class UsuarioModel extends \Com\Daw2\Core\BaseDbModel {
         $consulta .= " ORDER BY u.salarioBruto DESC";
         echo("<script>console.log('PHP: " . $consulta . "');</script>");
 
+        return $this->ejecutaConsulta($consulta, $datos);
+    }
+    
+    private function ejecutaConsulta(string $consulta, array $datos) {
         $stmt = $this->pdo->prepare($consulta);
         $stmt->execute($datos);
         return $stmt->fetchAll();

@@ -82,6 +82,9 @@
                 </form>
                 <div class="card-body">
                     <div class="col-12">
+                        <?php 
+                        if(count($usuarios)>0){
+                        ?>
                         <div>
                             <table class="table table-striped">
                                 <tr>
@@ -115,6 +118,12 @@
                         </div>
                     </div>
                     <?php
+                        }
+                        else{
+                    ?>
+                    <div class="alert alert-warning">No se han encontrado usuarios que cumplan los requisitos</div>
+                    <?php
+                }
                 }
                 ?>
             </div>
