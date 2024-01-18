@@ -93,10 +93,10 @@ class UsuarioModel extends \Com\Daw2\Core\BaseDbModel {
             $paisNum = 0;
             foreach ($idPaises as $idPais) {
                 $paisNum +=1;
-                $paisesQuery[] = " u.id_country = :idPais$paisNum";
+                $paisesQuery[] = ":idPais$paisNum";
                 $datos["idPais$paisNum"] = $idPais;
             }
-            $filtros[] = " (" . implode(" OR", $paisesQuery) . ")";
+            $filtros[] = " u.id_country IN (".implode(", ", $paisesQuery).")";
 
         }
 
