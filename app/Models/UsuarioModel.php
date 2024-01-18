@@ -32,83 +32,87 @@ class UsuarioModel extends \Com\Daw2\Core\BaseDbModel {
         return $stmt->fetchAll();
     }
 
-    function getByFiltros(int $idRol, string $username, float $minSalar, float $maxSalar, float $minRetencion, float $maxRetencion, $idPaises): array {
+    function getByFiltros(array $filtros): array {
         $consulta = self::SELECT_FROM;
-        $filtros = [];
+        $consultas = [];
         $datos = [];
         $paisesQuery = [];
 
-        if (!empty($idRol)) {
-            $filtros[] = " u.id_rol = :id_rol";
-            $datos['id_rol'] = $idRol;
+        if (!empty($filtros['id_rol']) && filter_var($filtros['id_rol'], FILTER_VALIDATE_INT)) {
+            $consultas[] = " u.id_rol = :id_rol";
+            $datos['id_rol'] = $filtros['id_rol'];
         }
 
-        if (!empty($username)) {
+        if (!empty($filtros['username'])) {
 
-            $filtros[] = " u.username LIKE :username";
-            $username = '%' . $username . '%';
-            $datos['username'] = $username;
+            $consultas[] = " u.username LIKE :username";
+            $username = '%' . $filtros['username'] . '%';
+            $datos['username'] = $filtros['username'];
         }
 
-        if (!empty($minSalar)) {
+        if (!empty($filtros['min_salar']) && is_numeric($filtros['min_salar'])) {
 
-            if ($minSalar < 0) {
-                $minSalar = 0;
+            if ($filtros['min_salar'] < 0) {
+                $filtros['min_salar'] = 0;
             }
 
-            $filtros[] = " u.salarioBruto >= :minSalar";
-            $datos['minSalar'] = $minSalar;
+            $consultas[] = " u.salarioBruto >= :minSalar";
+            $datos['minSalar'] = $filtros['min_salar'];
         }
 
-        if (!empty($maxSalar)) {
+        if (!empty($filtros['max_salar']) && is_numeric($filtros['max_salar'])) {
 
-            if ($maxSalar < 0) {
-                $maxSalar = 0;
+            if ($filtros['max_salar'] < 0) {
+                $filtros['max_salar'] = 0;
             }
 
-            $filtros[] = " u.salarioBruto <= :maxSalar";
-            $datos['maxSalar'] = $maxSalar;
+            $consultas[] = " u.salarioBruto <= :maxSalar";
+            $datos['maxSalar'] = $filtros['max_salar'];
         }
 
-        if (!empty($minRetencion)) {
+        if (!empty($filtros['min_retencion']) && is_numeric($filtros['min_retencion'])) {
 
-            if ($minRetencion < 0) {
-                $minRetencion = 0;
+            if ($filtros['min_retencion'] < 0) {
+                $filtros['min_retencion'] = 0;
             }
 
-            $filtros[] = " u.retencionIRPF >= :minRetencion";
-            $datos['minRetencion'] = $minRetencion;
+            $consultas[] = " u.retencionIRPF >= :minRetencion";
+            $datos['minRetencion'] = $filtros['min_retencion'];
         }
 
-        if (!empty($maxRetencion)) {
+        if (!empty($filtros['max_retencion']) && is_numeric($filtros['max_retencion'])) {
 
-            if ($maxRetencion < 0) {
-                $maxRetencion = 0;
+            if ($filtros['max_retencion'] < 0) {
+                $filtros['max_retencion'] = 0;
             }
 
-            $filtros[] = " u.retencionIRPF <= :maxRetencion";
-            $datos['maxRetencion'] = $maxRetencion;
+            $consultas[] = " u.retencionIRPF <= :maxRetencion";
+            $datos['maxRetencion'] = $filtros['max_retencion'];
         }
-        if (!empty($idPaises)) {
+        if (!empty($filtros['id_pais']) && is_array($filtros['id_pais'])) {
             $paisNum = 0;
-            foreach ($idPaises as $idPais) {
+            foreach ($filtros['id_pais'] as $idPais) {
                 $paisNum +=1;
                 $paisesQuery[] = ":idPais$paisNum";
                 $datos["idPais$paisNum"] = $idPais;
             }
-            $filtros[] = " u.id_country IN (".implode(", ", $paisesQuery).")";
+            $consultas[] = " u.id_country IN (".implode(", ", $paisesQuery).")";
 
         }
 
         if (count($datos) > 0) {
             $consulta .= " WHERE";
-            $consulta .= implode(" AND", $filtros);
+            $consulta .= implode(" AND", $consultas);
             
-        }
+        
         $consulta .= " ORDER BY u.salarioBruto DESC";
         echo("<script>console.log('PHP: " . $consulta . "');</script>");
 
         return $this->ejecutaConsulta($consulta, $datos);
+        }else{
+            return $this->getAllUsers();
+        }
+        
     }
     
     private function ejecutaConsulta(string $consulta, array $datos) {
