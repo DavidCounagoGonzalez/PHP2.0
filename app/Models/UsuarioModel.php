@@ -39,13 +39,13 @@ class UsuarioModel extends \Com\Daw2\Core\BaseDbModel {
         $paises = [];
 
         if (!empty($idRol)) {
-            array_push($filtros, " u.id_rol = :id_rol");
+            $filtros[] = " u.id_rol = :id_rol";
             $datos['id_rol'] = $idRol;
         }
 
         if (!empty($username)) {
 
-            array_push($filtros, " u.username LIKE :username");
+            $filtros[] = " u.username LIKE :username";
             $username = '%' . $username . '%';
             $datos['username'] = $username;
         }
@@ -56,7 +56,7 @@ class UsuarioModel extends \Com\Daw2\Core\BaseDbModel {
                 $minSalar = 0;
             }
 
-            array_push($filtros, " u.salarioBruto >= :minSalar");
+            $filtros[] = " u.salarioBruto >= :minSalar";
             $datos['minSalar'] = $minSalar;
         }
 
@@ -66,7 +66,7 @@ class UsuarioModel extends \Com\Daw2\Core\BaseDbModel {
                 $maxSalar = 0;
             }
 
-            array_push($filtros, " u.salarioBruto <= :maxSalar");
+            $filtros[] = " u.salarioBruto <= :maxSalar";
             $datos['maxSalar'] = $maxSalar;
         }
 
@@ -76,7 +76,7 @@ class UsuarioModel extends \Com\Daw2\Core\BaseDbModel {
                 $minRetencion = 0;
             }
 
-            array_push($filtros, " u.retencionIRPF >= :minRetencion");
+            $filtros[] = " u.retencionIRPF >= :minRetencion";
             $datos['minRetencion'] = $minRetencion;
         }
 
@@ -86,27 +86,25 @@ class UsuarioModel extends \Com\Daw2\Core\BaseDbModel {
                 $maxRetencion = 0;
             }
 
-            array_push($filtros, " u.retencionIRPF <= :maxRetencion");
+            $filtros[] = " u.retencionIRPF <= :maxRetencion";
             $datos['maxRetencion'] = $maxRetencion;
         }
         if (!empty($idPaises)) {
-
+            $paisNum = 0;
             foreach ($idPaises as $idPais) {
-                $paises[] = " u.id_country = $idPais";
+                $paisNum +=1;
+                $paises[] = " u.id_country = :idPais$paisNum";
+                $datos["idPais$paisNum"] = $idPais;
             }
             echo("<script>console.log('PHP: " . var_dump($paises) . "');</script>");
-            array_push($filtros, implode(" OR", $paises));
+            $filtros[] = implode(" OR", $paises);
 
         }
 
-        if (count($datos) > 0 || !empty($idPaises)) {
+        if (count($datos) > 0) {
             $consulta .= " WHERE";
-            $consulta .= $filtros[0];
-            foreach ($filtros as $key => $filtro) {
-                if ($key > 0) {
-                    $consulta .= " AND" . $filtro;
-                }
-            }
+            $consulta .= implode(" AND", $filtros);
+            
         }
         $consulta .= " ORDER BY u.salarioBruto DESC";
         echo("<script>console.log('PHP: " . $consulta . "');</script>");
