@@ -62,9 +62,8 @@
                                     <label for="id_pais">Paises:</label>
                                     <select name="id_pais[]" id="id_pais" class="form-control select2" data-placeholder="Pais" multiple>
                                         <option value="">-</option>
-                                        <?php
-                                        foreach ($paises as $pais) {
-                                            ?> <option value="<?php echo $pais['id'] ?>" <?php echo (isset($_GET['id_pais']) && $pais['id'] == $_GET['id_pais']) ? 'selected' : ''; ?> ><?php echo ucfirst($pais['country_name']) ?> </option>
+                                        <?php foreach ($paises as $pais) {?>
+                                            <option value="<?php echo $pais['id']; ?>" <?php echo (isset($input['id_pais']) && in_array($pais['id'], $input['id_pais'])) ? 'selected' : ''; ?>><?php echo $pais['country_name']; ?></option>
                                             <?php
                                         }
                                         ?>
@@ -82,48 +81,47 @@
                 </form>
                 <div class="card-body">
                     <div class="col-12">
-                        <?php 
-                        if(count($usuarios)>0){
-                        ?>
-                        <div>
-                            <table class="table table-striped">
-                                <tr>
-                                    <th>Usuarios</th>
-                                    <th>Rol</th>
-                                    <th>salarioBruto</th>
-                                    <th>retencionIRPF</th>
-                                    <th>Región</th>
-                                </tr>
-                                <?php
-                                foreach ($usuarios as $row) {
-
-                                    if ($row['activo'] == 0) {
-                                        ?> <tr class = "table-danger">
-                                            <?php
-                                        } else {
-                                            ?> <tr> 
-                                                <?php
-                                            }
-                                            ?>
-                                        <td><?php echo $row['username'] ?></td>
-                                        <td><?php echo $row['rol'] ?></td>
-                                        <td><?php echo $row['salarioBruto'] ?></td>
-                                        <td><?php echo $row['retencionIRPF'] ?></td>
-                                        <td><?php echo $row['country'] ?></td>
+                        <?php
+                        if (count($usuarios) > 0) {
+                            ?>
+                            <div>
+                                <table class="table table-striped">
+                                    <tr>
+                                        <th>Usuarios</th>
+                                        <th>Rol</th>
+                                        <th>salarioBruto</th>
+                                        <th>retencionIRPF</th>
+                                        <th>Región</th>
                                     </tr>
                                     <?php
-                                }
-                                ?>
-                            </table>
+                                    foreach ($usuarios as $row) {
+
+                                        if ($row['activo'] == 0) {
+                                            ?> <tr class = "table-danger">
+                                                <?php
+                                            } else {
+                                                ?> <tr> 
+                                                    <?php
+                                                }
+                                                ?>
+                                            <td><?php echo $row['username'] ?></td>
+                                            <td><?php echo $row['rol'] ?></td>
+                                            <td><?php echo $row['salarioBruto'] ?></td>
+                                            <td><?php echo $row['retencionIRPF'] ?></td>
+                                            <td><?php echo $row['country'] ?></td>
+                                        </tr>
+                                        <?php
+                                    }
+                                    ?>
+                                </table>
+                            </div>
                         </div>
-                    </div>
-                    <?php
-                        }
-                        else{
-                    ?>
-                    <div class="alert alert-warning">No se han encontrado usuarios que cumplan los requisitos</div>
-                    <?php
-                }
+                        <?php
+                    } else {
+                        ?>
+                        <div class="alert alert-warning">No se han encontrado usuarios que cumplan los requisitos</div>
+                        <?php
+                    }
                 }
                 ?>
             </div>
