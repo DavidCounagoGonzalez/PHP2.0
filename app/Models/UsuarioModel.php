@@ -105,7 +105,18 @@ class UsuarioModel extends \Com\Daw2\Core\BaseDbModel {
             $consulta .= implode(" AND", $consultas);
             
         
-        $consulta .= " ORDER BY u.salarioBruto DESC";
+        
+        if(isset($_GET['sorting']) && isset($_GET['campo'])){
+            $campo = 'username';
+            if($_GET['sorting'] == 'ASC'){
+                $sort = 'DESC';
+            }else{
+                $sort = 'ASC';
+            }
+            $campo = $_GET['campo'];
+            $consulta .= " ORDER BY u.".$_GET['campo']." ".$sort; 
+        }
+        
         echo("<script>console.log('PHP: " . $consulta . "');</script>");
 
         return $this->ejecutaConsulta($consulta, $datos);

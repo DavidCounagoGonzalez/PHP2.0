@@ -87,11 +87,12 @@
                             <div>
                                 <table class="table table-striped">
                                     <tr>
-                                        <th>Usuarios</th>
-                                        <th>Rol</th>
-                                        <th>salarioBruto</th>
-                                        <th>retencionIRPF</th>
-                                        <th>Región</th>
+                                        
+                                        <th><a href="/con-filtros?ordenar='.$ordena.'&campo=username">Usuarios</a></th>
+                                        <th><a href="/con-filtros?ordenar='.$ordena.'&campo=id_rol">Rol</a></th>
+                                        <th><a href="/con-filtros?ordenar='.$ordena.'&campo=salarioBruto">salarioBruto</a></th>
+                                        <th><a href="/con-filtros?ordenar='.$ordena.'&campo=retencionIRPF">retencionIRPF</a></th>
+                                        <th><a href="/con-filtros?ordenar='.$ordena.'&campo=country_name">Región</a></th>
                                     </tr>
                                     <?php
                                     foreach ($usuarios as $row) {
