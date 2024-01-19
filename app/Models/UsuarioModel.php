@@ -104,26 +104,24 @@ class UsuarioModel extends \Com\Daw2\Core\BaseDbModel {
             $consulta .= " WHERE";
             $consulta .= implode(" AND", $consultas);
             
+        }
         
-        
-        if(isset($_GET['sorting']) && isset($_GET['campo'])){
-            $campo = 'username';
-            if($_GET['sorting'] == 'ASC'){
-                $sort = 'DESC';
-            }else{
-                $sort = 'ASC';
-            }
-            $campo = $_GET['campo'];
-            $consulta .= " ORDER BY u.".$_GET['campo']." ".$sort; 
+        if(isset($filtros['campo'])){
+            $campo = $filtros['campo'];
+//            if($_GET['sorting'] == 'ASC'){
+//                $sort = 'DESC';
+//            }else{
+//                $sort = 'ASC';
+//            }
+//            $campo = $_GET['campo'];
+            $consulta .= " ORDER BY ".$campo. " DESC"; 
         }
         
         echo("<script>console.log('PHP: " . $consulta . "');</script>");
 
-        return $this->ejecutaConsulta($consulta, $datos);
-        }else{
-            return $this->getAllUsers();
-        }
         
+
+        return $this->ejecutaConsulta($consulta, $datos);
     }
     
     private function ejecutaConsulta(string $consulta, array $datos) {

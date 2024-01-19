@@ -88,11 +88,11 @@
                                 <table class="table table-striped">
                                     <tr>
                                         
-                                        <th><a href="/con-filtros?ordenar='.$ordena.'&campo=username">Usuarios</a></th>
-                                        <th><a href="/con-filtros?ordenar='.$ordena.'&campo=id_rol">Rol</a></th>
-                                        <th><a href="/con-filtros?ordenar='.$ordena.'&campo=salarioBruto">salarioBruto</a></th>
-                                        <th><a href="/con-filtros?ordenar='.$ordena.'&campo=retencionIRPF">retencionIRPF</a></th>
-                                        <th><a href="/con-filtros?ordenar='.$ordena.'&campo=country_name">Región</a></th>
+                                        <th><a href="/con-filtros?campo=username">Usuarios</a></th>
+                                        <th><a href="/con-filtros?campo=id_rol">Rol</a></th>
+                                        <th><a href="/con-filtros?campo=salarioBruto">salarioBruto</a></th>
+                                        <th><a href="/con-filtros?campo=retencionIRPF">retencionIRPF</a></th>
+                                        <th><a href="/con-filtros?campo=country_name">Región</a></th>
                                     </tr>
                                     <?php
                                     foreach ($usuarios as $row) {
