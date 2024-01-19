@@ -102,11 +102,7 @@ class UsuarioModel extends \Com\Daw2\Core\BaseDbModel {
         }
 
         
-        if(!isset($filtros['campo']) || $filtros['campo'] < 1 || $filtros['campo']>count(self::ORDER_ARRAY)){
-            $campo = 1;
-        }else{
-            $campo=$filtros['campo'];
-        }
+        $campo = $this->getOrder($filtros);
         $campoOrder = self::ORDER_ARRAY[$campo - 1];
         
         
@@ -125,5 +121,18 @@ class UsuarioModel extends \Com\Daw2\Core\BaseDbModel {
         $stmt = $this->pdo->prepare($consulta);
         $stmt->execute($datos);
         return $stmt->fetchAll();
+    }
+    
+    public static function getMaxColumnOrder() :int {
+        return count(self::ORDER_ARRAY);
+    }
+    
+    public function getOrder(array $filtros) :int{
+        if(!isset($filtros['campo']) || $filtros['campo'] < 1 || $filtros['campo']>$this->getMaxColumnOrder()){
+            $campo = 1;
+        }else{
+            $campo= (int)$filtros['campo'];
+        }
+        return $campo;
     }
 }
