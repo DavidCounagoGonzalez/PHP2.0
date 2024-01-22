@@ -86,13 +86,12 @@
                             ?>
                             <div>
                                 <table class="table table-striped">
-                                    <tr>
-                                        
-                                        <th><a href="/con-filtros?campo=1">Usuarios</a><?php echo ($campo == 1) ? '<i class="fas fa-sort-amount-down-alt">' : '' ?></th>
-                                        <th><a href="/con-filtros?campo=2">Rol</a><?php echo ($campo == 2) ? '<i class="fas fa-sort-amount-down-alt">' : '' ?></th>
-                                        <th><a href="/con-filtros?campo=3">salarioBruto</a><?php echo ($campo == 3) ? '<i class="fas fa-sort-amount-down-alt">' : '' ?></th>
-                                        <th><a href="/con-filtros?campo=4">retencionIRPF</a><?php echo ($campo == 4) ? '<i class="fas fa-sort-amount-down-alt">' : '' ?></th>
-                                        <th><a href="/con-filtros?campo=5">Región</a><?php echo ($campo == 5) ? '<i class="fas fa-sort-amount-down-alt">' : '' ?></th>
+                                    <tr>   
+                                        <th><a href="/con-filtros?campo=1&sentido=<?php echo ($campo == 1 && $sentido == 'asc') ? 'desc' : 'asc' ?>">Usuarios</a><?php echo ($campo == 1) ? '<i class="fas fa-sort-amount-down-alt">' : '' ?></th>
+                                        <th><a href="/con-filtros?campo=2&sentido=<?php echo ($campo == 2 && $sentido == 'asc') ? 'desc' : 'asc' ?>">Rol</a><?php echo ($campo == 2) ? '<i class="fas fa-sort-amount-down-alt">' : '' ?></th>
+                                        <th><a href="/con-filtros?campo=3&sentido=<?php echo ($campo == 3 && $sentido == 'asc') ? 'desc' : 'asc' ?>">salarioBruto</a><?php echo ($campo == 3) ? '<i class="fas fa-sort-amount-down-alt">' : '' ?></th>
+                                        <th><a href="/con-filtros?campo=4&sentido=<?php echo ($campo == 4 && $sentido == 'asc') ? 'desc' : 'asc' ?>">retencionIRPF</a><?php echo ($campo == 4) ? '<i class="fas fa-sort-amount-down-alt">' : '' ?></th>
+                                        <th><a href="/con-filtros?campo=5&sentido=<?php echo ($campo == 5 && $sentido == 'asc') ? 'desc' : 'asc' ?>">Región</a><?php echo ($campo == 5) ? '<i class="fas fa-sort-amount-down-alt">' : '' ?></th>
                                     </tr>
                                     <?php
                                     foreach ($usuarios as $row) {

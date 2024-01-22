@@ -48,7 +48,7 @@ class UsuarioModel extends \Com\Daw2\Core\BaseDbModel {
 
             $consultas[] = " u.username LIKE :username";
             $username = '%' . $filtros['username'] . '%';
-            $datos['username'] = $filtros['username'];
+            $datos['username'] = $username;
         }
 
         if (!empty($filtros['min_salar']) && is_numeric($filtros['min_salar'])) {
@@ -106,11 +106,11 @@ class UsuarioModel extends \Com\Daw2\Core\BaseDbModel {
         $campoOrder = self::ORDER_ARRAY[$campo - 1];
         
         
-
+        
         if (!empty($datos)) {
-            $consulta .= " WHERE".implode(" AND", $consultas). " ORDER BY " . $campoOrder;
+            $consulta .= " WHERE".implode(" AND", $consultas). " ORDER BY " . $campoOrder . " " . $this->getSentido($filtros);
         }else{
-            $consulta .= " ORDER BY " . $campoOrder;
+            $consulta .= " ORDER BY " . $campoOrder . " " . $this->getSentido($filtros);
         }
         
         echo("<script>console.log('PHP: " . $consulta . "');</script>");
@@ -134,5 +134,14 @@ class UsuarioModel extends \Com\Daw2\Core\BaseDbModel {
             $campo= (int)$filtros['campo'];
         }
         return $campo;
+    }
+    
+    function getSentido(array $filtros){
+        if(isset($filtros['sentido']) && $filtros['sentido'] == 'desc'){
+            return 'desc';
+        }
+        else{
+            return 'asc';
+        }
     }
 }
