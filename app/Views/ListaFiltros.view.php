@@ -5,6 +5,8 @@
         <div class="col-12">
             <div class="card shadow mb-4">
                 <form method="get" action="con-filtros">
+                    <input type="hidden" class="form-control" name="campo" id="campo" value="<?php echo $campo?>"/>
+                    <input type="hidden" class="form-control" name="sentido" id="sentido" value="<?php echo $sentido?>"/>
                     <div
                         class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                         <h6 class="m-0 font-weight-bold text-primary">Filtros</h6>                                    
@@ -87,11 +89,11 @@
                             <div>
                                 <table class="table table-striped">
                                     <tr>   
-                                        <th><a href="/con-filtros?campo=1&sentido=<?php echo ($campo == 1 && $sentido == 'asc') ? 'desc' : 'asc' ?>">Usuarios</a><?php echo ($campo == 1) ? '<i class="fas fa-sort-amount-down-alt">' : '' ?></th>
-                                        <th><a href="/con-filtros?campo=2&sentido=<?php echo ($campo == 2 && $sentido == 'asc') ? 'desc' : 'asc' ?>">Rol</a><?php echo ($campo == 2) ? '<i class="fas fa-sort-amount-down-alt">' : '' ?></th>
-                                        <th><a href="/con-filtros?campo=3&sentido=<?php echo ($campo == 3 && $sentido == 'asc') ? 'desc' : 'asc' ?>">salarioBruto</a><?php echo ($campo == 3) ? '<i class="fas fa-sort-amount-down-alt">' : '' ?></th>
-                                        <th><a href="/con-filtros?campo=4&sentido=<?php echo ($campo == 4 && $sentido == 'asc') ? 'desc' : 'asc' ?>">retencionIRPF</a><?php echo ($campo == 4) ? '<i class="fas fa-sort-amount-down-alt">' : '' ?></th>
-                                        <th><a href="/con-filtros?campo=5&sentido=<?php echo ($campo == 5 && $sentido == 'asc') ? 'desc' : 'asc' ?>">Región</a><?php echo ($campo == 5) ? '<i class="fas fa-sort-amount-down-alt">' : '' ?></th>
+                                        <th><a href="/con-filtros?campo=1&sentido=<?php echo ($campo == 1 && $sentido == 'asc') ? 'desc' : 'asc' ?>&<?php echo $parametros ?>">Usuarios</a><?php echo ($campo == 1) ? '<i class="fas fa-sort-amount-'.($sentido == 'asc' ? 'down' : 'up' ).'-alt">' : '' ?></th>
+                                        <th><a href="/con-filtros?campo=2&sentido=<?php echo ($campo == 2 && $sentido == 'asc') ? 'desc' : 'asc' ?>&<?php echo $parametros ?>">Rol</a><?php echo ($campo == 2) ? '<i class="fas fa-sort-amount-'.($sentido == 'asc' ? 'down' : 'up' ).'-alt">' : '' ?></th>
+                                        <th><a href="/con-filtros?campo=3&sentido=<?php echo ($campo == 3 && $sentido == 'asc') ? 'desc' : 'asc' ?>&<?php echo $parametros ?>">salarioBruto</a><?php echo ($campo == 3) ? '<i class="fas fa-sort-amount-'.($sentido == 'asc' ? 'down' : 'up' ).'-alt">' : '' ?></th>
+                                        <th><a href="/con-filtros?campo=4&sentido=<?php echo ($campo == 4 && $sentido == 'asc') ? 'desc' : 'asc' ?>&<?php echo $parametros ?>">retencionIRPF</a><?php echo ($campo == 4) ? '<i class="fas fa-sort-amount-'.($sentido == 'asc' ? 'down' : 'up' ).'-alt">' : '' ?></th>
+                                        <th><a href="/con-filtros?campo=5&sentido=<?php echo ($campo == 5 && $sentido == 'asc') ? 'desc' : 'asc' ?>&<?php echo $parametros ?>">Región</a><?php echo ($campo == 5) ? '<i class="fas fa-sort-amount-'.($sentido == 'asc' ? 'down' : 'up' ).'-alt">' : '' ?></th>
                                     </tr>
                                     <?php
                                     foreach ($usuarios as $row) {

@@ -73,12 +73,17 @@ class UsuarioController extends \Com\Daw2\Core\BaseController {
         $paisesModel = new \Com\Daw2\Models\PaisesModel();
         $paises = $paisesModel->getAllPaises();
         
+        $copiaGET = $_GET;
+        unset($copiaGET['campo']);
+        unset($copiaGET['sentido']);
+        
         $data['usuarios'] = $usuarios;
         $data['roles'] = $roles;
         $data['paises'] = $paises;
         $data['input'] = $input;
         $data['campo'] = $modelo->getOrder($_GET);
         $data['sentido'] = $modelo->getSentido($_GET);
+        $data['parametros'] = http_build_query($copiaGET);
         $data['js'] = array('plugins/select2/js/select2.full.min.js', 'assets/js/pages/usuarios-filtro.view.js');
 
         $this->view->showViews(array('templates/header.view.php', 'ListaFiltros.view.php', 'templates/footer.view.php'), $data);
