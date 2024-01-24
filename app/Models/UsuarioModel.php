@@ -36,6 +36,94 @@ class UsuarioModel extends \Com\Daw2\Core\BaseDbModel {
 
     function getByFiltros(array $filtros): array {
         $consulta = self::SELECT_FROM;
+        
+        $informacion = $this->Filtrado($filtros);
+
+        $campo = $this->getOrder($filtros);
+        $campoOrder = self::ORDER_ARRAY[$campo - 1];
+        
+        if(isset($filtros['page'])){
+            $actuales = ($this->getRegistros($filtros) - 1) * $_ENV['page.size'];
+            $limite = " LIMIT " . $_ENV['page.size'] . " OFFSET " . $actuales;
+        }else{
+            $limite = " LIMIT " . $_ENV['page.size'];
+        }
+        
+        if (!empty($informacion['datos'])) {
+            $consulta .= " WHERE".implode(" AND", $informacion['consultas']). " ORDER BY " . $campoOrder . " " . $this->getSentido($filtros) .  " " . $limite;
+        }else{
+            $consulta .= " ORDER BY " . $campoOrder . " " . $this->getSentido($filtros) . " " .$limite;
+        }
+        
+        echo("<script>console.log('PHP: " . $consulta . "');</script>");
+        return $this->ejecutaConsulta($consulta, $informacion['datos']);
+    }
+    
+    private function ejecutaConsulta(string $consulta, array $datos) {
+        $stmt = $this->pdo->prepare($consulta);
+        $stmt->execute($datos);
+        return $stmt->fetchAll();
+    }
+    
+    public static function getMaxColumnOrder() :int {
+        return count(self::ORDER_ARRAY);
+    }
+    
+    public function getOrder(array $filtros) :int{
+        if(!isset($filtros['campo']) || $filtros['campo'] < 1 || $filtros['campo']>$this->getMaxColumnOrder()){
+            $campo = 1;
+        }else{
+            $campo= (int)$filtros['campo'];
+        }
+        return $campo;
+    }
+    
+    function getSentido(array $filtros){
+        if(isset($filtros['sentido']) && $filtros['sentido'] == 'desc'){
+            return 'desc';
+        }
+        else{
+            return 'asc';
+        }
+    }
+    
+    function totalPaginas(array $filtros){
+        $total = self::SELECT_COUNT;
+        $informacion = $this->Filtrado($filtros);
+        
+        if(!empty($informacion['datos'])){
+            $total .= " WHERE".implode(" AND", $informacion['consultas']);  
+        }
+        
+        $stmt = $this->pdo->prepare($total);
+        $stmt->execute($informacion['datos']);
+        $registros = $stmt->fetch()['total'];
+        $total_paginas = ceil(floatval($registros/$_ENV['page.size']));
+        echo("<script>console.log('PHP: " . $registros . "');</script>");
+        return $total_paginas;
+    }
+
+
+    function getRegistros (array $filtros)  : int{
+       
+        $total_paginas = $this->totalPaginas($filtros);
+        
+        if (isset($filtros['page'])) {
+            $paginaAct = $filtros['page'];
+            
+            if($paginaAct<1){
+                $paginaAct = 1;
+            }elseif ($paginaAct>$total_paginas) {
+                $paginaAct = $total_paginas;
+            }
+            return (int) $paginaAct;
+        }else{
+            return (int) 1;
+        }
+        
+    }
+    
+    private function Filtrado(array $filtros){
         $consultas = [];
         $datos = [];
         $paisesQuery = [];
@@ -101,82 +189,12 @@ class UsuarioModel extends \Com\Daw2\Core\BaseDbModel {
             $consultas[] = " u.id_country IN (".implode(", ", $paisesQuery).")";
 
         }
-
         
-        $campo = $this->getOrder($filtros);
-        $campoOrder = self::ORDER_ARRAY[$campo - 1];
+        $informacion = array(
+            "datos" => $datos,
+            "consultas" => $consultas
+        );
         
-        if(isset($filtros['page'])){
-            $actuales = ($this->getRegistros($filtros) - 1) * $_ENV['page.size'];
-            $limite = " LIMIT " . $_ENV['page.size'] . " OFFSET " . $actuales;
-        }else{
-            $limite = " LIMIT " . $_ENV['page.size'];
-        }
-        
-        
-        if (!empty($datos)) {
-            $consulta .= " WHERE".implode(" AND", $consultas). " ORDER BY " . $campoOrder . " " . $this->getSentido($filtros) .  " " . $limite;
-        }else{
-            $consulta .= " ORDER BY " . $campoOrder . " " . $this->getSentido($filtros) . " " .$limite;
-        }
-        
-        echo("<script>console.log('PHP: " . $consulta . "');</script>");
-        return $this->ejecutaConsulta($consulta, $datos);
-    }
-    
-    private function ejecutaConsulta(string $consulta, array $datos) {
-        $stmt = $this->pdo->prepare($consulta);
-        $stmt->execute($datos);
-        return $stmt->fetchAll();
-    }
-    
-    public static function getMaxColumnOrder() :int {
-        return count(self::ORDER_ARRAY);
-    }
-    
-    public function getOrder(array $filtros) :int{
-        if(!isset($filtros['campo']) || $filtros['campo'] < 1 || $filtros['campo']>$this->getMaxColumnOrder()){
-            $campo = 1;
-        }else{
-            $campo= (int)$filtros['campo'];
-        }
-        return $campo;
-    }
-    
-    function getSentido(array $filtros){
-        if(isset($filtros['sentido']) && $filtros['sentido'] == 'desc'){
-            return 'desc';
-        }
-        else{
-            return 'asc';
-        }
-    }
-    
-    function totalPaginas(){
-        $stmt = $this->pdo->query(self::SELECT_COUNT);
-        $registros = $stmt->fetch()['total'];
-        $total_paginas = ceil(floatval($registros/$_ENV['page.size']));
-        
-        return $total_paginas;
-    }
-
-
-    function getRegistros (array $filtros)  : int{
-       
-        $total_paginas = $this->totalPaginas();
-        
-        if (isset($filtros['page'])) {
-            $paginaAct = $filtros['page'];
-            
-            if($paginaAct<1){
-                $paginaAct = 1;
-            }elseif ($paginaAct>$total_paginas) {
-                $paginaAct = $total_paginas;
-            }
-            return (int) $paginaAct;
-        }else{
-            return (int) 1;
-        }
-        
+        return $informacion;
     }
 }
