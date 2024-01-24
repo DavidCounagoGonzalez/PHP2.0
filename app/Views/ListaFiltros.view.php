@@ -86,13 +86,6 @@
                         <?php
                         if (count($usuarios) > 0) {
                             ?>
-                            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between" >
-                                <a href="/con-filtros?page=<?php echo 1 ?>&<?php echo $parametrosPag ?>"><input type="button" id="btnmenos" value="<<"/></a> 
-                                <a href="/con-filtros?page=<?php echo $page-1 ?>&<?php echo $parametrosPag ?>"><input type="button" id="btnmenos" value="<"/></a> 
-                                <a href="/con-filtros?page=<?php echo $page?>&<?php echo $parametrosPag ?>"><?php echo $page ;?></a>
-                                <a href="/con-filtros?page=<?php echo $page+1 ?>&<?php echo $parametrosPag ?>"><input type="button" id="btnmas" value=">"/></a>
-                                <a href="/con-filtros?page=<?php echo $totalPaginas ?>&<?php echo $parametrosPag ?>"><input type="button" id="btnmas" value=">>"/></a>
-                            </div>
                             <div>
                                 <table class="table table-striped">
                                     <tr>   
@@ -135,6 +128,37 @@
                 ?>
                         <p id="numRegistros">Resultados encontrados: <?php echo $numRegistros ?></p>
             </div>
+                <div class="card-footer">
+                    <nav aria-label="Navegación por paginas">
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item">
+                                <a class="page-link" href="/con-filtros?page=<?php echo 1 ?>&<?php echo $parametrosPag ?>" aria-label="First">
+                                    <span aria-hidden="true">&laquo;</span>
+                                    <span class="sr-only">First</span>
+                                </a> 
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="/con-filtros?page=<?php echo $page-1 ?>&<?php echo $parametrosPag ?>"" aria-label="First">
+                                    <span aria-hidden="true">&lt;</span>
+                                    <span class="sr-only">Previous</span>
+                                </a> 
+                            </li>
+                            <li class="page-item active"><a class="page-link" href="/con-filtros?page=<?php echo $page?>&<?php echo $parametrosPag ?>"><?php echo $page ;?></a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="/con-filtros?page=<?php echo $page+1 ?>&<?php echo $parametrosPag ?>" aria-label="First">
+                                    <span aria-hidden="true">&gt;</span>
+                                    <span class="sr-only">Next</span>
+                                </a> 
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="/con-filtros?page=<?php echo $totalPaginas ?>&<?php echo $parametrosPag ?>" aria-label="First">
+                                    <span aria-hidden="true">&raquo;</span>
+                                    <span class="sr-only">Last</span>
+                                </a> 
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
         </div>
     </div>
 

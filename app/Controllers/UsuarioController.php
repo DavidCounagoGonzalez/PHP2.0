@@ -76,6 +76,7 @@ class UsuarioController extends \Com\Daw2\Core\BaseController {
         $copiaGET = $_GET;
         unset($copiaGET['campo']);
         unset($copiaGET['sentido']);
+        unset($copiaGET['page']);
         
         $copiaGETPag = $_GET;
         unset($copiaGETPag['page']);
