@@ -131,6 +131,9 @@
                 <div class="card-footer">
                     <nav aria-label="Navegación por paginas">
                         <ul class="pagination justify-content-center">
+                            <?php 
+                            if($page>1){
+                            ?>
                             <li class="page-item">
                                 <a class="page-link" href="/con-filtros?page=<?php echo 1 ?>&<?php echo $parametrosPag ?>" aria-label="First">
                                     <span aria-hidden="true">&laquo;</span>
@@ -143,7 +146,11 @@
                                     <span class="sr-only">Previous</span>
                                 </a> 
                             </li>
+                            <?php } ?>
                             <li class="page-item active"><a class="page-link" href="/con-filtros?page=<?php echo $page?>&<?php echo $parametrosPag ?>"><?php echo $page ;?></a></li>
+                            <?php  
+                            if($page < $totalPaginas){
+                            ?>
                             <li class="page-item">
                                 <a class="page-link" href="/con-filtros?page=<?php echo $page+1 ?>&<?php echo $parametrosPag ?>" aria-label="First">
                                     <span aria-hidden="true">&gt;</span>
@@ -156,6 +163,7 @@
                                     <span class="sr-only">Last</span>
                                 </a> 
                             </li>
+                            <?php } ?>
                         </ul>
                     </nav>
                 </div>
