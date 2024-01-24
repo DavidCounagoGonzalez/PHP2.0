@@ -87,7 +87,7 @@ class UsuarioModel extends \Com\Daw2\Core\BaseDbModel {
         }
     }
     
-    function totalPaginas(array $filtros){
+    function getNumRegistros(array $filtros){
         $total = self::SELECT_COUNT;
         $informacion = $this->Filtrado($filtros);
         
@@ -97,7 +97,13 @@ class UsuarioModel extends \Com\Daw2\Core\BaseDbModel {
         
         $stmt = $this->pdo->prepare($total);
         $stmt->execute($informacion['datos']);
-        $registros = $stmt->fetch()['total'];
+        return $stmt->fetch()['total'];
+        
+    }
+
+
+    function totalPaginas(array $filtros){
+        $registros = $this->getNumRegistros($filtros);
         $total_paginas = ceil(floatval($registros/$_ENV['page.size']));
         echo("<script>console.log('PHP: " . $registros . "');</script>");
         return $total_paginas;

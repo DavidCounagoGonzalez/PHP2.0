@@ -87,6 +87,7 @@ class UsuarioController extends \Com\Daw2\Core\BaseController {
         $data['campo'] = $modelo->getOrder($_GET);
         $data['sentido'] = $modelo->getSentido($_GET);
         $data['parametros'] = http_build_query($copiaGET);
+        $data['numRegistros'] = $modelo->getNumRegistros($_GET);
         $data['totalPaginas'] = $modelo->totalPaginas($_GET);
         $data['page'] = $modelo->getRegistros($_GET);
         $data['parametrosPag'] = http_build_query($copiaGETPag);

@@ -133,6 +133,7 @@
                     }
                 }
                 ?>
+                        <p id="numRegistros">Resultados encontrados: <?php echo $numRegistros ?></p>
             </div>
         </div>
     </div>
