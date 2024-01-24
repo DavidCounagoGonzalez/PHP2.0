@@ -106,12 +106,18 @@ class UsuarioModel extends \Com\Daw2\Core\BaseDbModel {
         $campo = $this->getOrder($filtros);
         $campoOrder = self::ORDER_ARRAY[$campo - 1];
         
+        if(isset($filtros['page'])){
+            $actuales = ($this->getRegistros($filtros) - 1) * $_ENV['page.size'];
+            $limite = " LIMIT " . $_ENV['page.size'] . " OFFSET " . $actuales;
+        }else{
+            $limite = " LIMIT " . $_ENV['page.size'];
+        }
         
         
         if (!empty($datos)) {
-            $consulta .= " WHERE".implode(" AND", $consultas). " ORDER BY " . $campoOrder . " " . $this->getSentido($filtros);
+            $consulta .= " WHERE".implode(" AND", $consultas). " ORDER BY " . $campoOrder . " " . $this->getSentido($filtros) .  " " . $limite;
         }else{
-            $consulta .= " ORDER BY " . $campoOrder . " " . $this->getSentido($filtros);
+            $consulta .= " ORDER BY " . $campoOrder . " " . $this->getSentido($filtros) . " " .$limite;
         }
         
         echo("<script>console.log('PHP: " . $consulta . "');</script>");
@@ -146,19 +152,30 @@ class UsuarioModel extends \Com\Daw2\Core\BaseDbModel {
         }
     }
     
-    function getRegistros (array $filtros)  : int{
-       
- 
+    function totalPaginas(){
         $stmt = $this->pdo->query(self::SELECT_COUNT);
         $registros = $stmt->fetch()['total'];
-        $total_paginas = ceil(floatval($registros/$_ENV['page.size'])); 
+        $total_paginas = ceil(floatval($registros/$_ENV['page.size']));
         
-        if (!isset($filtros['page']) || $filtros['page']>0) {
+        return $total_paginas;
+    }
+
+
+    function getRegistros (array $filtros)  : int{
+       
+        $total_paginas = $this->totalPaginas();
+        
+        if (isset($filtros['page'])) {
+            $paginaAct = $filtros['page'];
             
-            return (int) $total_paginas;
-            
+            if($paginaAct<1){
+                $paginaAct = 1;
+            }elseif ($paginaAct>$total_paginas) {
+                $paginaAct = $total_paginas;
+            }
+            return (int) $paginaAct;
         }else{
-            return (int) 0;
+            return (int) 1;
         }
         
     }

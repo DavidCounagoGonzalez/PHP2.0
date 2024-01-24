@@ -79,7 +79,6 @@ class UsuarioController extends \Com\Daw2\Core\BaseController {
         
         $copiaGETPag = $_GET;
         unset($copiaGETPag['page']);
-        unset($copiaGETPag['paginacion']);
         
         $data['usuarios'] = $usuarios;
         $data['roles'] = $roles;
@@ -88,6 +87,7 @@ class UsuarioController extends \Com\Daw2\Core\BaseController {
         $data['campo'] = $modelo->getOrder($_GET);
         $data['sentido'] = $modelo->getSentido($_GET);
         $data['parametros'] = http_build_query($copiaGET);
+        $data['totalPaginas'] = $modelo->totalPaginas();
         $data['page'] = $modelo->getRegistros($_GET);
         $data['parametrosPag'] = http_build_query($copiaGETPag);
         $data['js'] = array('plugins/select2/js/select2.full.min.js', 'assets/js/pages/usuarios-filtro.view.js');
