@@ -86,6 +86,11 @@
                         <?php
                         if (count($usuarios) > 0) {
                             ?>
+                            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between" >
+                                <a href="/con-filtros?page=<?php echo $page ?>&paginar=<?php echo -1 ?>&<?php echo $parametrosPag ?>"><input type="button" id="btnmenos" value="<"/></a> 
+                                <a href="/con-filtros?page=<?php echo $page?>&paginar=<?php echo 0 ?>&<?php echo $parametrosPag ?>"><?php echo $page ;?></a>
+                                <a href="/con-filtros?page=<?php echo $page ?>&paginar=<?php echo 1 ?>&<?php echo $parametrosPag ?>"><input type="button" id="btnmas" value=">"/></a>
+                            </div>
                             <div>
                                 <table class="table table-striped">
                                     <tr>   

@@ -6,6 +6,7 @@ class UsuarioModel extends \Com\Daw2\Core\BaseDbModel {
 
     const SELECT_FROM = "SELECT u.* , ar.nombre_rol  as rol, ac.country_name as country FROM usuario u LEFT JOIN aux_rol ar ON ar.id_rol = u.id_rol LEFT JOIN aux_countries ac ON u.id_country = ac.id";
     const ORDER_ARRAY = ['username', 'rol', 'salarioBruto', 'retencionIRPF', 'country_name'];
+    const SELECT_COUNT = "SELECT COUNT(*) as total FROM usuario u";
     
     function getAllUsers(): array {
         $stmt = $this->pdo->query(self::SELECT_FROM);
@@ -143,5 +144,22 @@ class UsuarioModel extends \Com\Daw2\Core\BaseDbModel {
         else{
             return 'asc';
         }
+    }
+    
+    function getRegistros (array $filtros)  : int{
+       
+ 
+        $stmt = $this->pdo->query(self::SELECT_COUNT);
+        $registros = $stmt->fetch()['total'];
+        $total_paginas = ceil(floatval($registros/$_ENV['page.size'])); 
+        
+        if (!isset($filtros['page']) || $filtros['page']>0) {
+            
+            return (int) $total_paginas;
+            
+        }else{
+            return (int) 0;
+        }
+        
     }
 }

@@ -77,6 +77,10 @@ class UsuarioController extends \Com\Daw2\Core\BaseController {
         unset($copiaGET['campo']);
         unset($copiaGET['sentido']);
         
+        $copiaGETPag = $_GET;
+        unset($copiaGETPag['page']);
+        unset($copiaGETPag['paginacion']);
+        
         $data['usuarios'] = $usuarios;
         $data['roles'] = $roles;
         $data['paises'] = $paises;
@@ -84,6 +88,8 @@ class UsuarioController extends \Com\Daw2\Core\BaseController {
         $data['campo'] = $modelo->getOrder($_GET);
         $data['sentido'] = $modelo->getSentido($_GET);
         $data['parametros'] = http_build_query($copiaGET);
+        $data['page'] = $modelo->getRegistros($_GET);
+        $data['parametrosPag'] = http_build_query($copiaGETPag);
         $data['js'] = array('plugins/select2/js/select2.full.min.js', 'assets/js/pages/usuarios-filtro.view.js');
 
         $this->view->showViews(array('templates/header.view.php', 'ListaFiltros.view.php', 'templates/footer.view.php'), $data);
